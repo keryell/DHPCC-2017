@@ -6,6 +6,23 @@ http://sycl.tech/distributed-heterogeneous-programming-in-c-cpp-dhpccpp17.html
 
 https://easychair.org/cfp/dhpcc17
 
+
+.. contents::
+
+
+Getting started with this article
+=================================
+
+You can get a ``DHPCC-2017-triSYCL-OpenCL.pdf`` file for this article
+on a Linux machine with::
+
+  cd src
+  make
+
+If you need to get a running full LaTeX environment, look at
+https://gitenterprise.xilinx.com/rkeryell/survival_kit
+
+
 Motivation
 ==========
 
@@ -107,3 +124,11 @@ Organising Committee
 ====================
 
 - Paul Keir, University of the West of Scotland (UK)
+
+..
+    # Some Emacs stuff:
+    ### Local Variables:
+    ### mode: rst
+    ### minor-mode: flyspell
+    ### ispell-local-dictionary: "american"
+    ### End:

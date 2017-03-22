@@ -1,4 +1,4 @@
-\documentclass[sigplan, anonymous, review]{acmart}
+\documentclass[sigplan, review]{acmart}
 
 \usepackage{booktabs} % For formal tables
 
@@ -15,104 +15,47 @@
 
 
 % DOI
-\acmDOI{10.475/123_4}
+%\acmDOI{10.475/123_4}
 
 % ISBN
-\acmISBN{123-4567-24-567/08/06}
+%\acmISBN{123-4567-24-567/08/06}
 
 %Conference
-\acmConference[WOODSTOCK'97]{ACM Woodstock conference}{July 1997}{El
-  Paso, Texas USA} 
-\acmYear{1997}
-\copyrightyear{2016}
+\acmConference[DHPCC'2017]{Distributed \& Heterogeneous Programming in
+  C/C++ Workshop 2017}{May 2017}{Toronto, Canada}
 
-\acmPrice{15.00}
+\acmMonth{5}
+\acmYear{2017}
+
+%\acmPrice{15.00}
 
 %\acmBadgeL[http://ctuning.org/ae/ppopp2016.html]{ae-logo}
-\acmBadgeR[http://ctuning.org/ae/ppopp2016.html]{ae-logo}
+%\acmBadgeR[http://ctuning.org/ae/ppopp2016.html]{ae-logo}
 
 
 \begin{document}
-\title{SIG Proceedings Paper in LaTeX Format}
-\titlenote{Produces the permission block, and
-  copyright information}
-\subtitle{Extended Abstract}
-\subtitlenote{The full version of the author's guide is available as
-  \texttt{acmart.pdf} document}
 
-\author{Ben Trovato}
-\authornote{Dr.~Trovato insisted his name be first.}
-\orcid{1234-5678-9012}
+\title{SYCL C++17 and OpenCL interoperability with triSYCL}
+
+\author{Anastasios Doumoulakis}
+\email{anastasi@xilinx.com}
+
+\author{Ronan Keryell}
+\email{Ronan.Keryell@xilinx.com}
+
+\author{Kenneth O'Brien}
+\email{kennetho@xilinx.com}
+
 \affiliation{%
-  \institution{Institute for Clarity in Documentation}
-  \streetaddress{P.O. Box 1212}
-  \city{Dublin} 
-  \state{Ohio} 
-  \postcode{43017-6221}
+  \institution{Xilinx Research}
+  \streetaddress{2020 Bianconi Avenue}
+  \city{Dublin}
+  \country{Ireland}
+  \postcode{D24 T683}
 }
-\email{trovato@corporation.com}
-
-\author{G.K.M. Tobin}
-\authornote{The secretary disavows any knowledge of this author's actions.}
-\affiliation{%
-  \institution{Institute for Clarity in Documentation}
-  \streetaddress{P.O. Box 1212}
-  \city{Dublin} 
-  \state{Ohio} 
-  \postcode{43017-6221}
-}
-\email{webmaster@marysville-ohio.com}
-
-\author{Lars Th{\o}rv{\"a}ld}
-\authornote{This author is the
-  one who did all the really hard work.}
-\affiliation{%
-  \institution{The Th{\o}rv{\"a}ld Group}
-  \streetaddress{1 Th{\o}rv{\"a}ld Circle}
-  \city{Hekla} 
-  \country{Iceland}}
-\email{larst@affiliation.org}
-
-\author{Lawrence P. Leipuner}
-\affiliation{
-  \institution{Brookhaven Laboratories}
-  \streetaddress{P.O. Box 5000}}
-\email{lleipuner@researchlabs.org}
-
-\author{Sean Fogarty}
-\affiliation{%
-  \institution{NASA Ames Research Center}
-  \city{Moffett Field}
-  \state{California} 
-  \postcode{94035}}
-\email{fogartys@amesres.org}
-
-\author{Charles Palmer}
-\affiliation{%
-  \institution{Palmer Research Laboratories}
-  \streetaddress{8600 Datapoint Drive}
-  \city{San Antonio}
-  \state{Texas} 
-  \postcode{78229}}
-\email{cpalmer@prl.com}
-
-\author{John Smith}
-\affiliation{\institution{The Th{\o}rv{\"a}ld Group}}
-\email{jsmith@affiliation.org}
-
-\author{Julius P.~Kumquat}
-\affiliation{\institution{The Kumquat Consortium}}
-\email{jpkumquat@consortium.net}
-
-
-% The default list of authors is too long for headers}
-\renewcommand{\shortauthors}{B. Trovato et al.}
 
 
 \begin{abstract}
-This paper provides a sample of a \LaTeX\ document which conforms,
-somewhat loosely, to the formatting guidelines for
-ACM SIG Proceedings. 
 \end{abstract}
 
 %
@@ -153,20 +96,20 @@ ACM SIG Proceedings.
 % We no longer use \terms command
 %\terms{Theory}
 
-\keywords{ACM proceedings, \LaTeX, text tagging}
-
-\begin{teaserfigure}
-  \includegraphics[width=\textwidth]{sampleteaser}
-  \caption{This is a teaser}
-  \label{fig:teaser}
-\end{teaserfigure}
+\keywords{C++17, SYCL, OpenCL}
 
 
 \maketitle
 
-\input{samplebody-conf}
-
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{sigproc} 
+\bibliography{biblio}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-auto-untabify: t
+%%% TeX-PDF-mode: t
+%%% ispell-local-dictionary: "american"
+%%% End:
