@@ -42,6 +42,12 @@ All submissions must be made electronically through the conference submission si
 - Short Paper: Four to six pages in standard SIGPLAN two-column
   conference format (preprint mode, with page numbers)
 
+https://www.acm.org/publications/proceedings-template
+
+https://www.acm.org/binaries/content/assets/publications/consolidated-tex-template/acmart.pdf
+
+https://www.acm.org/binaries/content/assets/publications/consolidated-tex-template/acmart.zip
+
 Submissions must be in PDF format and printable on US Letter size paper. All submissions will be peer-reviewed by at least two members of the program committee. We will aim to give longer presentation slots to papers than to extended abstracts. Conference papers will not be published, but made available through the website, alongside the slides used for each presentation. The aim is to enable authors to get feedback and ideas that can later go into other publications. We will encourage questions and discussions during the workshop, to create an open environment for the community to engage with.
 
 Topics of Interest
