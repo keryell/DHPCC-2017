@@ -56,6 +56,7 @@
 
 
 \begin{abstract}
+Heterogeneous computing 
 \end{abstract}
 
 %
@@ -100,6 +101,59 @@
 
 
 \maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+
+Computing architectures nowadays are huge multi-processor
+system-on-chips with different kind of processors, GPU, configurable
+specific accelerators (video CODEC...), reconfigurable programmable
+logic (FPGA), various hierarchies of memory and memory interfaces,
+configurable IO and network support, security support, power control,
+etc. High-performance applications may use a hierarchy of such system
+up to fill up a full-scale data-center.
+
+So the programmer is facing nowadays a fractal architecture, demanding
+also more and more control for power efficiency. This tends to require
+a dense fractal set of skills and tools.
+
+SYCL \cite{C++:P00236R0:SYCL} is a new open standard from Khronos
+Group aiming at solving some of the programming issues related to
+heterogeneous computing.  This pure C++17 domain-specific embedded
+language allows the programmer to write single-source C++17 host code
+with accelerated code expressed as functors. The data accesses are
+described with accessor objects that implicitly define a task graph
+that can be asynchronously scheduled on a distributed-memory system
+including several CPU and accelerators.
+
+This programming model is quite generic but provides also an
+interoperability mode with the OpenCL realm, another standard from
+Khronos Group aimed at heterogeneous computing with a C host API and
+separate language for the kernels (C, C++, SPIR and SPIR-V).  This
+allows a SYCL C++ application to recycle existing OpenCL kernels into
+a higher level C++ programming model, relieving the programmer from
+explicitly defining the memory transfers.
+
+In this article we present in Section~\ref{sec:sycl} the SYCL
+standard, then in Section~\ref{sec:sycl-opencl-inter} to finish in
+Section~\ref{sec:exper-with-opencl} with some experiments with the
+triSYCL open source implementation of the SYCL standard.
+
+\section{SYCL}
+\label{sec:sycl}
+
+
+\section{SYCL and OpenCL interoperability mode}
+\label{sec:sycl-opencl-inter}
+
+
+\section{Experimenting with OpenCL interoperability mode of SYCL}
+\label{sec:exper-with-opencl}
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{biblio}
