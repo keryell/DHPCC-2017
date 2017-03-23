@@ -150,9 +150,50 @@ triSYCL open source implementation of the SYCL standard.
 \section{Experimenting with OpenCL interoperability mode of SYCL}
 \label{sec:exper-with-opencl}
 
+\subsection{Example from Anastasios}
+\label{sec:example-from-anast}
+
+
+\url{https://github.com/archonSTB/triSYCLExample}
+
+\subsection{Example from Ken}
+\label{sec:example-from-ken}
+
+
+\section{Related work}
+\label{sec:related-work}
+
 
 \section{Conclusion}
 \label{sec:conclusion}
+
+Heterogeneous computing in embedded and high-performance computing is
+here to stay because of physical constrains. This puts the pressure on
+the programmers to integrate a full system across the various
+accelerators. The SYCL standard C++ DSeL allows a single-source
+approach for both host and accelerators parts in type-safe way to
+simplify the process while interoperable with the ubiquitous C/C++
+world. The SYCL runtime provides an implicit task graph managing
+asynchronicity and data transfers across the various memory spaces.
+
+Besides this very general programming model, SYCL provides also
+interoperability with the OpenCL world, allowing to launch existing
+OpenCL kernels while taking advantage of the SYCL framework. While no
+longer a single-source programming model in that case, it still
+provides the implicit task graph with buffers and accessors, relieving
+the programmer to manage explicitly the buffers and memory transfers
+between the host and the devices.
+
+This interoperability mode in the SYCL standard has some value by
+itself even if this role was not envisioned at the first place. It
+allows to use SYCL as a high-level framework to run OpenCL kernels
+using a pure C++ approach without the need of a device compiler.
+
+The open-source triSYCL implementation \cite{triSYCL} we are working
+on provides also this interoperability mode, as shown with the
+application samples presented in this article and the performance
+comparisons with other frameworks.
+
 
 
 \bibliographystyle{ACM-Reference-Format}
