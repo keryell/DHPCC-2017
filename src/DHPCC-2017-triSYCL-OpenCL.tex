@@ -461,6 +461,27 @@ presented at C++ F2F committee Jacksonville 2016/02
 \section{Related work}
 \label{sec:related-work}
 
+The problems addressed here are really meaningful if we consider all
+the frameworks developed by a lot of people using heterogeneous
+computing. This also means it is impossible to be exhaustive, even by
+looking at the C++ frameworks only.
+
+CL2.hpp
+
+Boost.Compute
+
+VexCL
+
+Google provided the Acxxel library \cite{Acxxel} inside the LLVM
+compiler runtime \texttt{parallel-libs}. It allows to manage OpenCL
+and CUDA devices and to launch kernels on them, while unify most of
+the similar concepts on the host side within a unique syntax. There is
+no dependency graph between tasks and thus the transfers between host
+and devices are still to be done by the programmer.
+\url{https://github.com/llvm-project/parallel-libs}
+
+ViennaCL
+
 
 \section{Conclusion}
 \label{sec:conclusion}
