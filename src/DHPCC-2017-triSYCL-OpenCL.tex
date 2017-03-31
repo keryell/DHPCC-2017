@@ -65,7 +65,22 @@
 
 
 \begin{abstract}
-Heterogeneous computing 
+  Heterogeneous computing is required in systems ranging from low-end
+  embedded systems up to the high-end HPC systems to reach
+  high-performance while keeping power consumption low. Having more
+  and more accelerators and CPU put also more challenges on the
+  programmer, requiring even more expertise. Fortunately, new modern
+  C++-based domain-specific languages such as SYCL allow to simplify
+  the programming task at the full system level while keeping high
+  performance.
+
+  Besides its single-source programming aspect, the SYCL open standard
+  from Khronos Group has an OpenCL interoperability mode, allowing to
+  reuse existing OpenCL code inside the SYCL framework to simplify and
+  optimize the data transfers between host and devices.
+
+  We present some experiments on 2 applications on GPU and FPGA with
+  the triSYCL open-source implementation.
 \end{abstract}
 
 %
@@ -115,7 +130,7 @@ Heterogeneous computing
 % We no longer use \terms command
 %\terms{Theory}
 
-\keywords{C++17, SYCL, OpenCL}
+\keywords{C++17, SYCL, DSeL, OpenCL, FPGA, GPU, triSYCL}
 
 
 \maketitle
