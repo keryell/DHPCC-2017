@@ -1,3 +1,93 @@
+% Khronos
+
+@online{SYCL-1.2,
+  author = {Khronos OpenCL Working Group, SYCL subgroup},
+  editor = {Lee Howes and Maria Rovatsou},
+  title = {SYCL Specification, SYCL integrates OpenCL devices with modern C++},
+  year =  2015,
+  month = may,
+  url = "https://www.khronos.org/registry/SYCL/specs/sycl-1.2.pdf",
+}
+
+
+@online{SYCL-2.2-provisional,
+  author = {Khronos OpenCL Working Group, SYCL subgroup},
+  editor = {Maria Rovatsou},
+  title = {SYCL Provisional Specification, SYCL integrates OpenCL
+                  devices with modern C++ using a single source
+                  design},
+  year =  2016,
+  month = feb,
+  url = "https://www.khronos.org/registry/SYCL/specs/sycl-2.2.pdf",
+}
+
+
+@online{C++:P00236R0:SYCL,
+  author = {Michael Wong and Andrew Richards and Maria Rovatsou and Ruyman Reyes},
+  title = {Khronos's {OpenCL} {SYCL} to support Heterogeneous Devices
+                  for {C++}},
+  year =  2016,
+  month = feb,
+  number = {P00236R0},
+  url = "http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0236r0.pdf",
+}
+
+
+@online{OpenCL-API-2.2-provisional,
+  author = {Khronos OpenCL Working Group},
+  editor = {Alex Bourd},
+  title = {The OpenCL Specification, Version: 2.2, Document Revision: 06},
+  year =  2016,
+  month = mar,
+  url = "https://www.khronos.org/registry/OpenCL/specs/opencl-2.2.pdf",
+}
+
+
+@online{OpenCL-C++-2.2-provisional,
+  author = {Khronos OpenCL Working Group},
+  editor = {Bartosz Sochacki},
+  title = {The OpenCL C++ Specification, Version: 1.0, Document
+                  Revision: 22},
+  year =  2016,
+  month = apr,
+  url = "https://www.khronos.org/registry/OpenCL/specs/opencl-2.2-cplusplus.pdf",
+}
+
+
+% triSYCL
+
+@online{triSYCL,
+  title = {triSYCL --- An open source implementation of OpenCL SYCL
+                  from Khronos Group},
+  author = {Ronan Keryell},
+  year = 2014,
+  month = apr,
+  url = "https://github.com/triSYCL/triSYCL",
+}
+
+
+
+
+
+
+@online{Boost.Compute,
+  author = {Kyle Lutz},
+  title = {Boost.Compute},
+  year =  2014,
+  month = dec,
+  url = "http://boostorg.github.io/compute/",
+}
+
+
+@online{VexCL,
+  author = {Denis Demidov},
+  title = {VexCL: a C++ vector expression template library for OpenCL/CUDA},
+  year =  2016,
+  month = oct,
+  url = "https://github.com/ddemidov/vexcl",
+}
+
+
 @phdthesis{PhD:Howes2010,
  author = {Howes, Lee William},
  title = {Indexed dependence metadata and its applications in software
@@ -5,6 +95,16 @@
  year = {2010},
  school = {Imperial College London},
  note = {\url{http://www.leehowes.com/files/HowesThesis2010.pdf}}
+}
+
+
+@online{OpenCL-API+C-1.2,
+  author = {Khronos OpenCL Working Group},
+  editor = {Aaftab Munshi},
+  title = {The OpenCL Specification, Version: 1.2, Document Revision: 19},
+  year =  2012,
+  month = nov,
+  url = "https://www.khronos.org/registry/OpenCL/specs/opencl-1.2.pdf",
 }
 
 
@@ -34,6 +134,20 @@
   note = {\url{http://arxiv.org/abs/1302.558}},
 }
 
+
+% OpenMP
+
+@online{OpenMP-5.0-preview-1,
+  author = {All members of the OpenMP Language Working Group},
+  title = {OpenMP Technical Report 4: Version 5.0 Preview 1},
+  year =  2016,
+  month = nov,
+  url = "http://www.openmp.org/wp-content/uploads/openmp-tr4.pdf",
+}
+
+
+
+% C++
 
 @TechReport{C++:N3988:aliasing,
   author = {Hal Finkel and Hubert Tong and Chandler Carruth and Clark
@@ -82,7 +196,7 @@
 
 
 @TechReport{C++:P0060R0:function_operator_dot,
-  author =       {Mathias Gaunard and Dietmar KÃ¼hl},
+  author =       {Mathias Gaunard and Dietmar Kühl},
   title =        {Function Object-Based Overloading of Operator Dot},
   year =         {2015},
   month =     sep,
@@ -91,14 +205,14 @@
 }
 
 
-@TechReport{C++:P00236R0:SYCL,
-  author = {Michael Wong and Andrew Richards and Maria Rovatsou and Ruyman Reyes},
-  title = {Khronos's {OpenCL} {SYCL} to support Heterogeneous Devices
-                  for {C++}},
-  year =  {2016},
-  month = feb,
-  number = {P00236R0},
-  note = {\url{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0236r0.pdf}},
+@TechReport{C++:P0069R0:hcc,
+  author = {Ben Sander and Greg Stoner and Siu-Chi Chan and Wen-Heng
+            (Jack) Chung and Robin Maffeo},
+  title = {A {C++} Compiler for Heterogeneous Computing},
+  year =  {2015},
+  month = sep,
+  number = {P0069R0},
+  note = {\url{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0069r0.pdf}},
 }
 
 
@@ -112,12 +226,54 @@
 }
 
 
-@TechReport{C++:P0069R0:hcc,
-  author = {Ben Sander and Greg Stoner and Siu-Chi Chan and Wen-Heng
-            (Jack) Chung and Robin Maffeo},
-  title = {A {C++} Compiler for Heterogeneous Computing},
-  year =  {2015},
-  month = sep,
-  number = {P0069R0},
-  note = {\url{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0069r0.pdf}},
+@online{C++:P0362R0,
+  title = {Towards support for Heterogeneous Devices in C++
+                  (Concurrency aspects)},
+  author = {Michael Wong and Andrew Richards and Maria Rovatsou and
+                  Ruyman Reyes and Lee Howes and Gordon Brown},
+  year =  2016,
+  month = may,
+  url = "www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0362r0.pdf",
+}
+
+@online{C++:P0363R0,
+  title = {Towards support for Heterogeneous Devices in C++ (Language
+                  aspects)},
+  author = {Michael Wong and Andrew Richards and Maria Rovatsou and
+                  Ruyman Reyes and Lee Howes and Gordon Brown},
+  year =  2016,
+  month = may,
+  url = "www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0363r0.pdf",
+}
+
+@online{C++:P0367R0,
+  title = {Accessors {---} a C++ standard library class to qualify
+                  data accesses},
+  author = {Ronan Keryell and Joël Falcou},
+  year =  2016,
+  month = may,
+  url = "www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0367r0.pdf",
+}
+
+
+% LLVM
+
+@online{Acxxel,
+  title = {LLVM parallel-libs Subproject Charter --- Acxxel},
+  key = {Acxxel},
+  year =  2016,
+  month = oct,
+  url = "https://github.com/llvm-project/parallel-libs",
+}
+
+
+% TensorFlow
+
+@online{TensorFlow-1.0,
+  title = {TensorFlow 1.0: An open-source software library for Machine
+                  Intelligence},
+  key = {TensorFlow},
+  year =  2017,
+  month = feb,
+  url = "https://www.tensorflow.org/",
 }

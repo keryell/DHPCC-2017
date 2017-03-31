@@ -249,18 +249,20 @@ int main() {
     \url{https://github.com/triSYCL/triSYCL/blob/master/tests/examples/demo_parallel_matrix_add.cpp}.\label{fig:SYCL-example}}
 \end{figure*}
 
-SYCL \cite{SYCL-1.2,SYCL2.2} (pronounced ``sickle'') is a
+SYCL \cite{SYCL-1.2,SYCL-2.2-provisional} (pronounced ``sickle'') is a
 royalty-free, cross-platform abstraction C++ programming model for
-OpenCL \cite{OpenCL-API-2.1, OpenCL-C-2.1}. SYCL builds on the
-underlying concepts, portability and efficiency of OpenCL while adding
-much of the ease of use and flexibility of single-source C++.
+OpenCL \cite{OpenCL-API-2.2-provisional,
+  OpenCL-C++-2.2-provisional}. SYCL builds on the underlying concepts,
+portability and efficiency of OpenCL while adding much of the ease of
+use and flexibility of single-source C++.
 
 Developers using SYCL are able to write standard C++14/C++17 code,
 with many of the techniques they are accustomed to, such as
 inheritance and templating. At the same time developers have access to
 the full range of capabilities of OpenCL both through the features of
 the SYCL libraries and, where necessary, through interoperation with
-code written directly to the OpenCL APIs~\cite{OpenCL-API-2.1}.
+code written directly to the OpenCL
+APIs~\cite{OpenCL-API-2.2-provisional}.
 
 SYCL implements a single-source multiple compiler-passes design which
 offers the power of source integration while allowing tool-chains to
@@ -309,12 +311,12 @@ The main interesting features that SYCL brings are:
 \item[hierarchical parallelism] to take advantage inside a task of the
   common intrinsic parallelism found in accelerators as shown on
   Figure~\ref{fig:OpenCL-execution-model}, that can be expressed
-  either as in OpenCL with ND-ranges or in a similar hierarchical way
-  on how it is done in OpenMP \cite{OpenMP-5}, but with a nicer
-  C++-friendly method based on lambda functions. The simpler
-  hierarchical way relieves the programmer from using painful
-  work-group synchronizations and is also more efficient on CPU and
-  FPGA;
+  either as in OpenCL with ND-ranges (multi-dimensional iteration
+  spaces) or in a similar hierarchical way on how it is done in OpenMP
+  \cite{OpenMP-5.0-preview-1}, but with a nicer C++-friendly method
+  based on lambda functions. The simpler hierarchical way relieves the
+  programmer from using painful work-group synchronizations and is
+  also more efficient on CPU and FPGA;
 
   \begin{figure}
     \includegraphics[width=\hsize]{figures/execution-model-no_GPU}
@@ -398,9 +400,10 @@ The main interesting features that SYCL brings are:
 SYCL retains the execution model, runtime feature set and device
 capabilities of the underlying OpenCL standard. This is why SYCL
 1.2~\cite{SYCL-1.2} targets devices with OpenCL
-1.2~\cite{OpenCL-API-1.2} capabilities, while SYCL 2.2~\cite{SYCL-2.2}
-targets devices with OpenCL 2.2~\cite{OpenCL-API-2.2}, adding for
-example the pipes and the shared memory between the host and devices.
+1.2~\cite{OpenCL-API+C-1.2} capabilities, while SYCL
+2.2~\cite{SYCL-2.2-provisional} targets devices with OpenCL
+2.2~\cite{OpenCL-API-2.2-provisional}, adding for example the pipes
+and the shared memory between the host and devices.
 
 The OpenCL C specification imposes some limitations on the full range
 of C++ features that SYCL is able to support. This ensures portability
@@ -429,8 +432,8 @@ as a foundation for innovation in programming models for heterogeneous
 systems, that builds on an open and widely implemented standard
 foundation in the form of OpenCL.
 
-This is why the OpenCL version of TensorFlow \cite{TensorFlow}, the
-C++ machine learning framework from Google, is actually using SYCL
+This is why the OpenCL version of TensorFlow \cite{TensorFlow-1.0},
+the C++ machine learning framework from Google, is actually using SYCL
 instead of plain OpenCL.
 
 SYCL is one of the candidates giving inputs on parallelism and
