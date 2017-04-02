@@ -471,14 +471,47 @@ presented at C++ F2F committee Jacksonville 2016/02
 \section{SYCL and OpenCL interoperability mode}
 \label{sec:sycl-opencl-inter}
 
- SYCL = very generic parallel model
- Specific to SYCL: OpenCL interoperability if needed
- Can interact with OpenCL/Vulkan/OpenGL/... program or libraries with no overhead
- Has also some value for OpenCL programmers tool
- Simplify boilerplate and housekeeping
- Programming without explicit buffer transfer
+SYCL is a very generic data-parallel task graph model implemented as a
+C++ DSeL that often relies on OpenCL and SPIR behind the hood to
+target accelerators, but it could use some other technology.
 
-\section{Experimenting OpenCL interoperability mode of SYCL with triSYCL}
+There is also in SYCL a specific OpenCL interoperability mode if
+needed, allowing direct interaction with the OpenCL world, and by
+transitivity to Vulkan/OpenGL/DirectX/... In this way it is possible
+to use existing programs or libraries with no overhead.
+
+There are 2 main parts in the interoperability mode:
+\begin{enumerate}
+\item it is possible to construct SYCL objects from existing OpenCL
+  objects to run SYCL single-source programs in relation with an
+  existing OpenCL framework. For example a SYCL buffer can be
+  constructed from an OpenCL \lstinline|cl_mem| or SYCL queue from a
+  \lstinline|cl_command_queue|;
+\item it is possible to extract OpenCL objects from higher-level SYCL
+  objects to execute OpenCL code from the SYCL world, for example
+  extract a \lstinline|cl_mem| from a SYCL accessor to launch an
+  OpenCL kernel.
+\end{enumerate}
+
+Whereas the interoperability mode was included in the SYCL standard to
+extend the applicability of SYCL on the OpenCL realm, it appears that
+this mode is useful by itself to do plain OpenCL programming in higher
+level C++, in the same way there exist already various C++ OpenCL
+wrapper.
+
+While it does not take advantage from the single-source programming
+style of SYCL, it has some value for OpenCL programmers as it
+simplifies the boilerplate and housekeeping. For example, it allows to
+use the task graph model on top of OpenCL kernels and the synergy
+between buffers and accessors relieves the programmer from managing
+explicitly the buffer content transfers between host and devices.
+
+In the following we present some use case of OpenCL interoperability
+using the triSYCL implementation.
+
+
+\section{Experimenting OpenCL interoperability mode of SYCL with
+  triSYCL}
 \label{sec:exper-with-opencl}
 
 triSYCL is...
