@@ -417,8 +417,8 @@ capabilities of the underlying OpenCL standard. This is why SYCL
 1.2~\cite{SYCL-1.2} targets devices with OpenCL
 1.2~\cite{OpenCL-API+C-1.2} capabilities, while SYCL
 2.2~\cite{SYCL-2.2-provisional} targets devices with OpenCL
-2.2~\cite{OpenCL-API-2.2-provisional}, adding for example the pipes
-and the shared memory between the host and devices.
+2.2~\cite{OpenCL-API-2.2-provisional} capabilities, adding for example
+the pipes and the shared memory between the host and devices.
 
 The OpenCL C specification imposes some limitations on the full range
 of C++ features that SYCL is able to support. This ensures portability
@@ -514,7 +514,19 @@ using the triSYCL implementation.
   triSYCL}
 \label{sec:exper-with-opencl}
 
-triSYCL is...
+triSYCL \cite{triSYCL} is an open-source implementation based on C++17
+and various Boost libraries \cite{Boost}. The device compiler used to
+outline the kernels in single-source mode is based on Clang
+\cite{Clang}/LLVM \cite{LLVM}. The OpenCL interoperability mode is
+based on Boost.Compute \cite{Boost.Compute}.
+
+Actually to even simplify further the programming style, triSYCL
+implements Boost.Compute interoperability mode too, as an extension to
+the SYCL standard.
+
+We have used triSYCL to simplify the OpenCL host-side programming of
+two applications related to machine learning.
+
 
 \subsection{Example from Anastasios}
 \label{sec:example-from-anast}
