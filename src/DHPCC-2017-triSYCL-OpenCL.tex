@@ -515,9 +515,9 @@ using the triSYCL implementation.
 \label{sec:exper-with-opencl}
 
 triSYCL \cite{triSYCL} is an open-source implementation based on C++17
-and various Boost libraries \cite{Boost}. The device compiler used to
+and various Boost libraries \cite{Boost-1.63}. The device compiler used to
 outline the kernels in single-source mode is based on Clang
-\cite{Clang}/LLVM \cite{LLVM}. The OpenCL interoperability mode is
+\cite{Clang-4.0}/LLVM \cite{LLVM-4.0}. The OpenCL interoperability mode is
 based on Boost.Compute \cite{Boost.Compute}.
 
 Actually to even simplify further the programming style, triSYCL
@@ -567,21 +567,36 @@ the frameworks developed by a lot of people using heterogeneous
 computing. This also means it is impossible to be exhaustive, even by
 looking at the C++ frameworks only.
 
-CL2.hpp
+The natural candidate is the second version of the official C++
+wrapper from Khronos, \texttt{cl2.hpp} \cite{cl2.hpp}. It is a
+straightforward C++ mapping around the OpenCL C API, at least managing
+the lifetime of the OpenCL using RAII mechanism. There is a variadic
+C++ API to launch kernels, but there is not very high-level compared
+to plain OpenCL. But since it is a basic C++ API, this API is often
+used by other higher-level API.
 
-Boost.Compute
+For example Boost.Compute \cite{Boost.Compute} is built on top of the
+basic previous one and offers also OpenCL API in a C++ mood.
+Boost.Compute is actually 2 different API. A basic layer is like
+\texttt{cl2.hpp} but in a more modern C++ and STL mind. This is why it
+is used by triSYCL. But there is also a higher level API, with
+parallel STL-like algorithms operating on device vectors. But there is
+no transparent motion of the data of these device vectors between host
+and device.
 
-VexCL
+VexCL \cite{VexCL} is higher-level than Boost.Compute since it can
+target both OpenCL or CUDA. It provides parallel STL algorithms with
+vectors that can be spread across several devices. There is some
+support to generate kernels by using symbolic execution. But there is
+still some explicit copy between device vectors and the host domain.
 
-Google provided the Acxxel library \cite{Acxxel} inside the LLVM
-compiler runtime \texttt{parallel-libs}. It allows to manage OpenCL
-and CUDA devices and to launch kernels on them, while unify most of
-the similar concepts on the host side within a unique syntax. There is
-no dependency graph between tasks and thus the transfers between host
-and devices are still to be done by the programmer.
-\url{https://github.com/llvm-project/parallel-libs}
-
-ViennaCL
+Google contributed the Acxxel library \cite{Acxxel-4.0} inside the
+LLVM compiler runtime \texttt{parallel-libs}. It allows to manage
+OpenCL and CUDA devices and to launch kernels on them, while unify
+most of the similar concepts on the host side within a unique
+syntax. There is no dependency graph between tasks and thus the
+transfers between host and devices are still to be done by the
+programmer.
 
 
 \section{Conclusion}
