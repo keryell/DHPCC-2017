@@ -5,6 +5,9 @@
 % To include figures
 \usepackage{graphicx}
 
+% For TiKZ plots
+\usepackage{tikz,pgfplots}
+
 % To typeset SYCL programs
 \usepackage{sycl}
 
@@ -532,13 +535,37 @@ two applications related to machine learning.
   norm}
 \label{sec:example-from-anast}
 
-To benchmark various languages and frameworks, we used a application
+To benchmark various languages and frameworks, we used an application
 for recognition of handwritten digits in 8-bit gray images of
-$28\times28$ pixels.
+$28 \times 28$ pixels.
 
 Basically there are 500 images compared against a training reference
 set of labeled digit images. A kernel is launches to compare each
 image against all the reference images.
+
+\begin{figure}
+  \begin{tikzpicture}
+    \begin{axis}[ ybar,axis on top, ymax=7, ymin=0, height=8cm,
+      width=\hsize, enlarge x limits=0.3, ymajorgrids, tick
+      align=inside, major grid style={draw=white}, axis x line*=left,
+      ylabel={ms}, xtick=data, legend cell align=left, max space
+      between ticks=20pt, legend style={ at={(0.3,1.0)} , column
+        sep=1ex }, symbolic x coords={cpu, igpu, gpu}, nodes near
+      coords=\rotatebox{90}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
+      ]
+      \addplot[draw=none,fill=blue!40!white] coordinates {(cpu, 4.527)
+        (igpu, 6.726) (gpu, 6.106) };
+      \addplot[draw=none,fill=green!40!white] coordinates {(cpu,
+        1.318) (igpu, 2.586) (gpu, 1.976) };
+      \addplot[draw=none,fill=red!40!white] coordinates {(cpu, 2.319)
+        (igpu, 2.300) (gpu, 1.054) };
+
+      \legend{triSYCL, triSYCL opt., OpenCL}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Performance results for digit recognition application.}
+  \label{fig:results-digit-recognition}
+\end{figure}
 
 The examples with a SYCL, SYCL with OpenCL interoperability running
 OpenCL kernel and a pure OpenCL implementations with the data sets can
@@ -650,7 +677,15 @@ Even if there is no explicit OpenCL buffer motion between host and
 device, the SYCL run-time uses the dependency graph constructed by the
 accessors to move or not to move the data for kernel execution.
 
-Table or plot comparing performance between various versions
+The performance results comparing the triSYCL version, the triSYCL
+version with OpenCL kernel executed in interoperability mode and the
+pure OpenCL version are shown on
+Figure~\ref{fig:results-digit-recognition}.
+
+Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
+and the community edition version of ComputeCpp \cite{ComputeCpp}
+cannot run yet on our Linux distribution, we cannot compare the
+results against the normal pure SYCL code running on GPU.
 
 
 \subsection{Binary neural network for image classification}
