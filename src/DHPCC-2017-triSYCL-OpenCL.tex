@@ -699,6 +699,14 @@ reference\footnote{The task graph is not used to optimize transfers or
   baseline.}, the one with optimized transfers and the pure OpenCL
 version are shown on Figure~\ref{fig:results-digit-recognition}.
 
+All the measurments where made on the same linux machine running 
+the kernel 4.10.6-1, whith gcc 6.3.1 as the compiler. The opencl
+runtimes where the following, for the GPU it was nvidia-opencl 378.13-6
+for the integrated GPU it was beignet 1.3.1-1 and for the CPU it was
+intel-opencl-runtime 1:16.1.1-2. The machine was running on a i7-6700HQ
+with 16Gb of RAM and a GTX 960M for the GPU. The compiler options can
+be seen at the github page.
+
 Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
 and the community edition version of ComputeCpp \cite{ComputeCpp}
 cannot run yet on our Linux distribution, we cannot compare the
