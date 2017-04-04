@@ -545,20 +545,20 @@ image against all the reference images.
 
 \begin{figure}
   \begin{tikzpicture}
-    \begin{axis}[ ybar,axis on top, ymax=7, ymin=0, height=8cm,
+    \begin{axis}[ ybar,axis on top, ymax=8, ymin=0, height=7cm,
       width=\hsize, enlarge x limits=0.3, ymajorgrids, tick
-      align=inside, major grid style={draw=white}, axis x line*=left,
+      align=inside, major grid style={draw=none}, axis x line*=left,
       ylabel={ms}, xtick=data, legend cell align=left, max space
-      between ticks=20pt, legend style={ at={(0.3,1.0)} , column
+      between ticks=20pt, legend style={ at={(0.4,1.0)} , column
         sep=1ex }, symbolic x coords={cpu, igpu, gpu}, nodes near
       coords=\rotatebox{90}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
       ]
-      \addplot[draw=none,fill=blue!40!white] coordinates {(cpu, 4.527)
-        (igpu, 6.726) (gpu, 6.106) };
+      \addplot[draw=none,fill=blue!40!white] coordinates {(cpu, 4.158)
+        (igpu, 7.275) (gpu, 6.717) };
       \addplot[draw=none,fill=green!40!white] coordinates {(cpu,
-        1.318) (igpu, 2.586) (gpu, 1.976) };
-      \addplot[draw=none,fill=red!40!white] coordinates {(cpu, 2.319)
-        (igpu, 2.300) (gpu, 1.054) };
+        1.329) (igpu, 2.303) (gpu, 1.642) };
+      \addplot[draw=none,fill=red!40!white] coordinates {(cpu, 0.917)
+        (igpu, 2.183) (gpu, 1.042) };
 
       \legend{triSYCL, triSYCL opt., OpenCL}
     \end{axis}
