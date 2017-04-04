@@ -141,7 +141,7 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Computing architectures nowadays are huge multi-processor
+Computing architectures nowadays are huge hybrid multi-processor
 system-on-chips with different kind of processors, GPU, configurable
 specific accelerators (video CODEC...), reconfigurable programmable
 logic (FPGA), various hierarchies of memory and memory interfaces,
@@ -153,7 +153,7 @@ So the programmer is facing nowadays a fractal architecture, demanding
 also more and more control for power efficiency. This tends to require
 a dense fractal set of skills and tools.
 
-SYCL \cite{C++:P00236R0:SYCL} is a new open standard from Khronos
+SYCL \cite{SYCL-1.2} is a new open standard from Khronos
 Group aiming at solving some of the programming issues related to
 heterogeneous computing.  This pure C++17 domain-specific embedded
 language allows the programmer to write single-source C++17 host code
@@ -173,7 +173,9 @@ explicitly defining the memory transfers.
 In this article we present in Section~\ref{sec:sycl} the SYCL
 standard, then in Section~\ref{sec:sycl-opencl-inter} to finish in
 Section~\ref{sec:exper-with-opencl} with some experiments with the
-triSYCL open source implementation of the SYCL standard.
+triSYCL open source implementation of the SYCL standard and comparing
+to some related work in Section~\ref{sec:related-work}.
+
 
 \section{SYCL}
 \label{sec:sycl}
