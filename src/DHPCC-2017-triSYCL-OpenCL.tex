@@ -545,13 +545,25 @@ image against all the reference images.
 
 \begin{figure}
   \begin{tikzpicture}
-    \begin{axis}[ ybar,axis on top, ymax=8, ymin=0, height=7cm,
-      width=\hsize, enlarge x limits=0.3, ymajorgrids, tick
-      align=inside, major grid style={draw=none}, axis x line*=left,
-      ylabel={ms}, xtick=data, legend cell align=left, max space
-      between ticks=20pt, legend style={ at={(0.4,1.0)} , column
-        sep=1ex }, symbolic x coords={cpu, igpu, gpu}, nodes near
-      coords=\rotatebox{90}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
+    \begin{axis}[ 
+      ybar,
+      axis on top,
+      ymax=8, ymin=0, 
+      height=7cm,
+      width=\hsize, 
+      enlarge x limits=0.3, 
+      ymajorgrids, 
+      tick align=inside,
+      major grid style={draw=none}, 
+      axis x line*=left,
+      ylabel={ms}, 
+      xtick=data, 
+      legend cell align=left, 
+      max space between ticks=20pt, 
+      legend style={ at={(0.4,1.0)}, column sep=1ex },
+      y label style={ at={(axis description cs:0.1,0.4)}, anchor=west},
+      symbolic x coords={cpu, gpu, igpu}, 
+      nodes near coords=\rotatebox{90}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
       ]
       \addplot[draw=none,fill=blue!40!white] coordinates {(cpu, 4.158)
         (igpu, 7.275) (gpu, 6.717) };
@@ -560,7 +572,7 @@ image against all the reference images.
       \addplot[draw=none,fill=red!40!white] coordinates {(cpu, 0.917)
         (igpu, 2.183) (gpu, 1.042) };
 
-      \legend{triSYCL, triSYCL opt., OpenCL}
+      \legend{triSYCL, triSYCL opt., "pure" OpenCL}
     \end{axis}
   \end{tikzpicture}
   \caption{Performance results for digit recognition application.}
@@ -677,16 +689,14 @@ Even if there is no explicit OpenCL buffer motion between host and
 device, the SYCL run-time uses the dependency graph constructed by the
 accessors to move or not to move the data for kernel execution.
 
-The performance results comparing the triSYCL version, the triSYCL
-version with OpenCL kernel executed in interoperability mode and the
-pure OpenCL version are shown on
-Figure~\ref{fig:results-digit-recognition}.
+The performance results comparing the triSYCL version without optimized
+transfers between host and device, the one with optimized transfers 
+and the pure OpenCL version are shown on Figure~\ref{fig:results-digit-recognition}.
 
 Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
 and the community edition version of ComputeCpp \cite{ComputeCpp}
 cannot run yet on our Linux distribution, we cannot compare the
 results against the normal pure SYCL code running on GPU.
-
 
 \subsection{Binary neural network for image classification}
 \label{sec:example-from-ken}
