@@ -574,10 +574,11 @@ image against all the reference images.
       \addplot[draw=none,fill=red!40!white] coordinates {(cpu, 0.917)
         (igpu, 2.183) (gpu, 1.042) };
 
-      \legend{triSYCL, triSYCL opt., "pure" OpenCL}
+      \legend{triSYCL red., triSYCL, "pure" OpenCL}
     \end{axis}
   \end{tikzpicture}
-  \caption{Performance results for digit recognition application.}
+  \caption{Average total execution time for digit recognition
+    application per image.}
   \label{fig:results-digit-recognition}
 \end{figure}
 
@@ -691,9 +692,12 @@ Even if there is no explicit OpenCL buffer motion between host and
 device, the SYCL run-time uses the dependency graph constructed by the
 accessors to move or not to move the data for kernel execution.
 
-The performance results comparing the triSYCL version without optimized
-transfers between host and device, the one with optimized transfers 
-and the pure OpenCL version are shown on Figure~\ref{fig:results-digit-recognition}.
+The performance results comparing a dumb triSYCL version with
+redundant transfers between host and device as a
+reference\footnote{The task graph is not used to optimize transfers or
+  to limit OpenCL buffer creations, to serve as an implementation
+  baseline.}, the one with optimized transfers and the pure OpenCL
+version are shown on Figure~\ref{fig:results-digit-recognition}.
 
 Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
 and the community edition version of ComputeCpp \cite{ComputeCpp}
