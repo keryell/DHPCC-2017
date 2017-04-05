@@ -487,12 +487,12 @@ to use existing programs or libraries with no overhead.
 
 There are 2 main parts in the interoperability mode:
 \begin{enumerate}
-\item it is possible to construct SYCL objects from existing OpenCL
+\item It is possible to construct SYCL objects from existing OpenCL
   objects to run SYCL single-source programs in relation with an
   existing OpenCL framework. For example a SYCL buffer can be
   constructed from an OpenCL \lstinline|cl_mem| or SYCL queue from a
   \lstinline|cl_command_queue|;
-\item it is possible to extract OpenCL objects from higher-level SYCL
+\item It is possible to extract OpenCL objects from higher-level SYCL
   objects to execute OpenCL code from the SYCL world, for example
   extract a \lstinline|cl_mem| from a SYCL accessor to launch an
   OpenCL kernel.
@@ -501,7 +501,7 @@ There are 2 main parts in the interoperability mode:
 Whereas the interoperability mode was included in the SYCL standard to
 extend the applicability of SYCL on the OpenCL realm, it appears that
 this mode is useful by itself to do plain OpenCL programming in higher
-level C++, in the same way there exist already various C++ OpenCL
+level C++, in the same way there already exists various C++ OpenCL
 wrapper.
 
 While it does not take advantage from the single-source programming
