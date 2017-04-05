@@ -525,7 +525,7 @@ outline the kernels in single-source mode is based on Clang
 \cite{Clang-4.0}/LLVM \cite{LLVM-4.0}. The OpenCL interoperability mode is
 based on Boost.Compute \cite{Boost.Compute}.
 
-Actually to even simplify further the programming style, triSYCL
+To even simplify further the programming style, triSYCL
 implements Boost.Compute interoperability mode too, as an extension to
 the SYCL standard.
 
@@ -541,8 +541,8 @@ To benchmark various languages and frameworks, we used an application
 for recognition of handwritten digits in 8-bit gray images of
 $28 \times 28$ pixels.
 
-Basically there are 500 images compared against a training reference
-set of labeled digit images. A kernel is launches to compare each
+There are 500 images compared against a training reference
+set of labeled digit images. A kernel is launched to compare each
 image against all the reference images.
 
 \begin{figure}
@@ -581,8 +581,8 @@ image against all the reference images.
   \label{fig:results-digit-recognition}
 \end{figure}
 
-The examples with a SYCL, SYCL with OpenCL interoperability running
-OpenCL kernel and a pure OpenCL implementations with the data sets can
+The examples are run with SYCL, SYCL with OpenCL interoperability running
+OpenCL kernel and a pure OpenCL implementations. The data sets can
 be found on \url{https://github.com/a-doumoulakis/triSYCL_knn} for
 further inspection.
 
@@ -618,7 +618,7 @@ int search_image(buffer<int>& training, const Img& img, queue& q, const kernel& 
   // Find the image with the minimum distance
   auto min_image = std::min_element(std::begin(res), std::end(res));
 
-  // Test if we found the good digit
+  // Test if we found the correct digit
   return
     training_set[std::distance(std::begin(res), min_image)].label == img.label;
 }
@@ -758,7 +758,7 @@ programmer.
 \label{sec:conclusion}
 
 Heterogeneous computing in embedded and high-performance computing is
-here to stay because of physical constrains. This puts the pressure on
+here to stay because of physical constraints. This puts the pressure on
 the programmers to integrate a full system across the various
 accelerators. The SYCL standard C++ DSeL allows a single-source
 approach for both host and accelerators parts in type-safe way to
@@ -775,7 +775,7 @@ the programmer to manage explicitly the buffers and memory transfers
 between the host and the devices.
 
 This interoperability mode in the SYCL standard has some value by
-itself even if this role was not envisioned at the first place. It
+itself even if this role was not envisioned in the first place. It
 allows to use SYCL as a high-level framework to run existing OpenCL
 kernels (even built-in kernels controlling networking devices on
 FPGA) using a pure C++ approach without the need of a device compiler.
