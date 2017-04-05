@@ -71,8 +71,8 @@
   Heterogeneous computing is required in systems ranging from low-end
   embedded systems up to the high-end HPC systems to reach
   high-performance while keeping power consumption low. Having more
-  and more accelerators and CPUs also creates a challenges for the programmer,
-  requiring even more expertise. Fortunately, new modern
+  and more accelerators and CPUs also creates challenges for the programmer,
+  requiring even more expertise of them. Fortunately, new modern
   C++-based domain-specific languages such as SYCL simplifies
   the programming at the full system level while keeping high
   performance.
@@ -82,7 +82,7 @@
   reuse existing OpenCL code inside the SYCL framework to simplify and
   optimize the data transfers between host and devices.
 
-  We present some experiments on an application on GPU and FPGA with
+  We present some experiments on two applications on GPU and FPGA with
   the triSYCL open-source implementation.
 \end{abstract}
 
@@ -316,7 +316,7 @@ with host code. This embedding of code offers three primary benefits:
 
 SYCL is a pure single-source C++ DSeL (Domain-Specific Embedded
 Language) providing simpler abstractions for heterogeneous
-computing. On Figure~\ref{fig:SYCL-example} is presented a small
+computing. In Figure~\ref{fig:SYCL-example} is presented a small
 application using SYCL concepts to create a graph of 3 asynchronous
 tasks to initialize 2 matrices and addition them before checking for
 the final result.
@@ -530,7 +530,7 @@ implements Boost.Compute interoperability mode too, as an extension to
 the SYCL standard.
 
 We have used triSYCL to simplify the OpenCL host-side programming of
-our machine learning application.
+our machine learning applications.
 
 
 \subsection{Handwritten digit recognition in gray images using L2
@@ -708,6 +708,9 @@ and the community edition version of ComputeCpp \cite{ComputeCpp}
 cannot run yet on our Linux distribution, we cannot compare the
 results against the normal pure SYCL code running on GPU.
 
+\subsection{Binary Neural Network for image classification}
+
+\emph{Awaiting clearance of IP issues for this application. Section to be added before workshop}
 
 \section{Related work}
 \label{sec:related-work}
@@ -777,7 +780,7 @@ FPGA) using a pure C++ approach without the need of a device compiler.
 
 The open-source triSYCL implementation \cite{triSYCL} we are working
 on provides also this interoperability mode, as shown with the
-application samples presented in this article and the performance
+application sample presented in this article and the performance
 comparisons with other frameworks.
 
 
