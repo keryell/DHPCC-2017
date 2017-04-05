@@ -82,7 +82,7 @@
   reuse existing OpenCL code inside the SYCL framework to simplify and
   optimize the data transfers between host and devices.
 
-  We present some experiments on 2 applications on GPU and FPGA with
+  We present some experiments on an application on GPU and FPGA with
   the triSYCL open-source implementation.
 \end{abstract}
 
@@ -530,7 +530,7 @@ implements Boost.Compute interoperability mode too, as an extension to
 the SYCL standard.
 
 We have used triSYCL to simplify the OpenCL host-side programming of
-two applications related to machine learning.
+our machine learning application.
 
 
 \subsection{Handwritten digit recognition in gray images using L2
@@ -701,17 +701,12 @@ runtimes where the following, for the GPU it was nvidia-opencl 378.13-6
 for the integrated GPU it was beignet 1.3.1-1 and for the CPU it was
 intel-opencl-runtime 1:16.1.1-2. The machine was running on a i7-6700HQ
 with 16Gb of RAM and a GTX 960M for the GPU. The compiler options can
-be seen at the github page.
+be seen on the github page.
 
 Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
 and the community edition version of ComputeCpp \cite{ComputeCpp}
 cannot run yet on our Linux distribution, we cannot compare the
 results against the normal pure SYCL code running on GPU.
-
-\subsection{Binary neural network for image classification}
-\label{sec:example-from-ken}
-
-\emph{Still waiting for the application to be demilitarized for IP issues...}
 
 
 \section{Related work}
