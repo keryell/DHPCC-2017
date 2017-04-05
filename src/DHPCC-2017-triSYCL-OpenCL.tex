@@ -574,10 +574,11 @@ image against all the reference images.
       \addplot[draw=none,fill=red!40!white] coordinates {(cpu, 0.917)
         (igpu, 2.183) (gpu, 1.042) };
 
-      \legend{triSYCL, triSYCL opt., "pure" OpenCL}
+      \legend{triSYCL red., triSYCL, "pure" OpenCL}
     \end{axis}
   \end{tikzpicture}
-  \caption{Performance results for digit recognition application.}
+  \caption{Average total execution time for digit recognition
+    application per image.}
   \label{fig:results-digit-recognition}
 \end{figure}
 
@@ -691,26 +692,32 @@ Even if there is no explicit OpenCL buffer motion between host and
 device, the SYCL run-time uses the dependency graph constructed by the
 accessors to move or not to move the data for kernel execution.
 
-The performance results comparing the triSYCL version without optimized
-transfers between host and device, the one with optimized transfers 
-and the pure OpenCL version are shown on Figure~\ref{fig:results-digit-recognition}.
+The performance results comparing a dumb triSYCL version with
+redundant transfers between host and device as a
+reference\footnote{The task graph is not used to optimize transfers or
+  to limit OpenCL buffer creations, to serve as an implementation
+  baseline.}, the one with optimized transfers and the pure OpenCL
+version are shown on Figure~\ref{fig:results-digit-recognition}.
 
-All the measurments where made on the same linux machine running 
-the kernel 4.10.6-1, whith gcc 6.3.1 as the compiler. The opencl
-runtimes where the following, for the GPU it was nvidia-opencl 378.13-6
-for the integrated GPU it was beignet 1.3.1-1 and for the CPU it was
-intel-opencl-runtime 1:16.1.1-2. The machine was running on a i7-6700HQ
-with 16Gb of RAM and a GTX 960M for the GPU. The compiler options can
-be seen on the github page.
+All the measurements were made on the same Linux machine (i7-6700HQ
+with 16~GB of RAM and a GTX 960M for the GPU) with 4.10.6-1 kernel
+and GCC 6.3.1. The OpenCL runtimes were nvidia-opencl
+378.13-6 for the discrete nVidia GPU, beignet 1.3.1-1 for the
+integrated Intel GPU and intel-opencl-runtime 1:16.1.1-2 for the Intel
+CPU. The compiler options can be seen at the GitHub project page.
 
 Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
 and the community edition version of ComputeCpp \cite{ComputeCpp}
 cannot run yet on our Linux distribution, we cannot compare the
 results against the normal pure SYCL code running on GPU.
 
-\subsection{Binary Neural Network for image classification}
 
-\emph{Awaiting clearance of IP issues for this application. Section to be added before workshop}
+\subsection{Binary Neural Network for image classification on FPGA}
+\label{sec:example-from-ken}
+
+\emph{Awaiting clearance of IP issues for this application. Section to
+  be added before the workshop.}
+
 
 \section{Related work}
 \label{sec:related-work}
