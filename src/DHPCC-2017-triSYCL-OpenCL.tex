@@ -145,7 +145,7 @@ Computing architectures nowadays are huge hybrid multi-processor
 system-on-chips with different kind of processors, GPU, configurable
 specific accelerators (video CODEC...), reconfigurable programmable
 logic (FPGA), various hierarchies of memory and memory interfaces,
-configurable IO and network support, security support, power control,
+configurable IO and network support, security support, and power control
 etc. High-performance applications may use a hierarchy of such systems
 scaling up towards utilizing a full-scale data-center.
 
@@ -171,8 +171,8 @@ a higher level C++ programming model, relieving the programmer from
 explicitly defining the memory transfers.
 
 In this article we present in Section~\ref{sec:sycl} the SYCL
-standard, then in Section~\ref{sec:sycl-opencl-inter} to finish in
-Section~\ref{sec:exper-with-opencl} with some experiments with the
+standard, then in Section~\ref{sec:sycl-opencl-inter} SYCL's interoperability mode with OpenCL, in
+Section~\ref{sec:exper-with-opencl} some experiments with the
 triSYCL open source implementation of the SYCL standard and comparing
 to some related work in Section~\ref{sec:related-work}.
 
@@ -184,7 +184,7 @@ to some related work in Section~\ref{sec:related-work}.
   \begin{tabular}{c}
     \begin{lstlisting}[basicstyle=\scriptsize]
 // Demonstrate the use of an asynchronous task graph of kernels to
-// initialize and addition 2 matrices.
+// initialize and add 2 matrices.
 #include <CL/sycl.hpp>
 #include <iostream>
 
@@ -205,7 +205,7 @@ int main() {
 
   // Launch a first asynchronous kernel to initialize a
   q.submit([&] (handler &cgh) {
-      // The kernel write a, so get a write accessor on it
+      // The kernel writes a, so get a write accessor on it
       auto A = a.get_access<access::mode::write>(cgh);
 
       // Enqueue a parallel kernel iterating on a N*M 2D iteration space
@@ -217,9 +217,9 @@ int main() {
 
   // Launch an asynchronous kernel to initialize b
   q.submit([&] (handler &cgh) {
-      // The kernel write b, so get a write accessor on it
+      // The kernel writes b, so get a write accessor on it
       auto B = b.get_access<access::mode::write>(cgh);
-      /* From the access pattern above, the SYCL runtime detect this
+      /* From the access pattern above, the SYCL runtime detects this
          command group is independent from the first one and can be
          scheduled independently */
 
@@ -246,7 +246,7 @@ int main() {
                                            });
       });
 
-    /* Request an access to read c from the host-side. The SYCL runtime
+    /* Request an accessor to read c from the host-side. The SYCL runtime
        ensures that c is ready when the accessor is returned */
     auto C = c.get_access<access::mode::read>();
     std::cout << std::endl << "Result:" << std::endl;
@@ -259,7 +259,7 @@ int main() {
           exit(-1);
         }
 
-  std::cout << "Good computation!" << std::endl;
+  std::cout << "Accurate computation!" << std::endl;
   return 0;
 }
     \end{lstlisting}
@@ -332,7 +332,7 @@ The main interesting features that SYCL brings are:
   common intrinsic parallelism found in accelerators as shown on
   Figure~\ref{fig:OpenCL-execution-model}, that can be expressed
   either as in OpenCL with ND-ranges (multi-dimensional iteration
-  spaces) or in a similar hierarchical way on how it is done in OpenMP
+  spaces) or in a similar hierarchical way to how it is done in OpenMP
   \cite{OpenMP-5.0-preview-1}, but with a nicer C++-friendly method
   based on lambda functions. The simpler hierarchical way relieves the
   programmer from using painful work-group synchronizations and is
@@ -346,7 +346,7 @@ The main interesting features that SYCL brings are:
     \label{fig:OpenCL-execution-model}
   \end{figure}
 
-\item[buffers] defining location-independent storage (no explicit
+\item[buffers] defining location-independent storage, (no explicit
   move) usable as multi-dimensional arrays to be used from the various
   CPU cores and accelerators;
 
@@ -406,8 +406,8 @@ The main interesting features that SYCL brings are:
   plain standard I/O messages in the code;
 
 \item[host emulation] is also for free, which interesting in the case
-  of the FPGA world where really synthesizing the code for the device
-  is very slow compared to running the code on CPU or even on GPU;
+  of the FPGA world where synthesizing the code for the device
+  is an offline activity compared to running the code on CPU or even on GPU;
 
 \item[cross-platform] support allows to have buffers used by different
   devices from different vendors in a seamless way, which is not
@@ -437,7 +437,7 @@ virtual function calls, function pointers in general, exceptions,
 runtime type information or the full set of C++ libraries that may
 depend on these features or on features of a particular host compiler.
 
-Anyway these features are not often used in high-performance code even
+These features are not often used in high-performance code even
 in plain C++ in the hot-path because of performance issues.
 Fortunately, the use of C++ features such as templates and inheritance
 on top of the OpenCL execution model opens a wide scope for innovation
