@@ -717,16 +717,25 @@ results against the normal pure SYCL code running on GPU.
 \subsection{Binary Neural Network for image classification on FPGA}
 \label{sec:example-from-ken}
 
+In our second example, we present the performance results of a binary neural network based application, which can accelerate its computation on an FPGA using SYCL or OpenCL APIs. The SYCL implementation is TriSYCL in interoperabilty mode and the OpenCL implementation is that of Xilinx SDAccel.
+
+In table~\ref{tbl:perfbnn}, we report the performance of four critical sections our application and the total execution time for each. The results are an average of 10 executions. \textit{Setup} accounts for the time to acquire an OpenCL platform, device, context and queue. \textit{Memory} accounts of the buffer allocation time of the input and output. \textit{Build} describes the time taken to read the binary kernel file from disk, build an OpenCL program, and from it instantiate the kernel. For both cases, this includes the reconfiguration of the FPGA. \textit{Kernel} accounts for the execution of the kernel, including the setting of arguments and launch. Finally, \textit{Total} accounts for the entirety of the accelerated section, from setup until the results are returned to the host.
+
+
+Our findings with this example is that SYCL with OpenCL interoperability mode is competetive with directly using OpenCL, with the exception of a small one time overhead during the build phase. We are currently working to resolve this issue. Encouragingly, the kernel performance between both are comparable.
 
 \begin{table}
 \caption{Performance Results (ms)}
-\begin{tabular}{|c |c| c| c| c|}
+\begin{tabular}{|c |c| c| c| c| c |}
 \hline
-			&	Setup			& Build & Kernel  & Total \\\hline
-OpenCL& 5940.33		&	3	& 4584.6	& 10538.8 \\\hline
-SYCL	& 5946.5	  & 3	& 4834.4	& 10784.5 \\\hline
+			&	\textit{Setup}			& \textit{Memory} & \textit{Build}  & \textit{Kernel} & \textit{Total} \\\hline
+OpenCL& 6490.22		&		.08& 4598.1	& 04.011 &11092.43 \\\hline
+SYCL	& 6411.32	  & .002 & 4903.65	& 03.91	&11325.57 \\\hline
 \end{tabular}
+\label{tbl:perfbnn}
 \end{table}
+
+
 
 %\emph{Awaiting clearance of IP issues for this application. Section to
 %  be added before the workshop.}
@@ -744,8 +753,8 @@ The natural candidate is the second version of the official C++
 wrapper from Khronos, \texttt{cl2.hpp} \cite{cl2.hpp}. It is a
 straightforward C++ mapping around the OpenCL C API, at least managing
 the lifetime of the OpenCL using RAII mechanism. There is a variadic
-C++ API to launch kernels, but there is not very high-level compared
-to plain OpenCL. But since it is a basic C++ API, this API is often
+C++ API to launch kernels, but it is not very high-level compared
+to plain OpenCL. Since it is a basic C++ API, this API is often
 used by other higher-level API.
 
 For example Boost.Compute \cite{Boost.Compute} is built on top of the
@@ -761,11 +770,11 @@ VexCL \cite{VexCL} is higher-level than Boost.Compute since it can
 target both OpenCL or CUDA. It provides parallel STL algorithms with
 vectors that can be spread across several devices. There is some
 support to generate kernels by using symbolic execution. But there is
-still some explicit copy between device vectors and the host domain.
+still some explicit copying required between device vectors and the host domain.
 
 Google contributed the Acxxel library \cite{Acxxel-4.0} inside the
-LLVM compiler runtime \texttt{parallel-libs}. It allows to manage
-OpenCL and CUDA devices and to launch kernels on them, while unify
+LLVM compiler runtime \texttt{parallel-libs}. It allows programmers to manage
+OpenCL and CUDA devices and to launch kernels on them, while unifying
 most of the similar concepts on the host side within a unique
 syntax. There is no dependency graph between tasks and thus the
 transfers between host and devices are still to be done by the
