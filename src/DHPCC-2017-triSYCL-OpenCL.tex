@@ -383,7 +383,7 @@ The main interesting features that SYCL brings are:
   between tasks without requiring the programmer to manage explicitly
   several command queues and synchronizing events for this;
 
-\item[single-source] programming model, taking advantage of OpenMP
+\item[single-source] programming model, similar to OpenMP
   simplicity and type safety but in a pure C++-friendly world, without
   requiring \lstinline{#pragma} that do not compose nicely with
   C++. This allows the writing of high-level programming and
@@ -424,7 +424,7 @@ capabilities of the underlying OpenCL standard. This is why SYCL
 1.2~\cite{OpenCL-API+C-1.2} capabilities, while SYCL
 2.2~\cite{SYCL-2.2-provisional} targets devices with OpenCL
 2.2~\cite{OpenCL-API-2.2-provisional} capabilities, adding for example
-the pipes and the shared memory between the host and devices.
+the pipes and the shared virtual memory between the host and devices.
 
 The OpenCL C specification imposes some limitations on the full range
 of C++ features that SYCL is able to support. This ensures portability
