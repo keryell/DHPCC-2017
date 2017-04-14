@@ -1,0 +1,151 @@
+Dear Ronan,
+
+On behalf of the DHPCC++ Program Committee, I am delighted to inform you that your paper, SYCL C++17 and OpenCL interoperability experimentation with  triSYCL, has been selected for publication by the ACM Digital Library as part of the proceedings of the 5th International Workshop on OpenCL.
+
+You will find the comments on your paper from our reviewers below. Please update your submission in the correct format, taking into account these recommendations. We are on a *very* tight schedule at this stage. Could you please complete this by April the 14th (this coming Friday).
+
+Correctly formatted consists of:
+
+- Camera ready submissions should be uploaded as a PDF.
+
+- Please use the latest ACM template, ‘sigconf’: http://www.acm.org/publications/proceedings-template
+
+- There will be a Rights Management Form sent from ACM shortly, and it should be completed asap as it will give you the correct copyright statement which must be included on your camera ready PDF.
+
+- Please generate CCS2012 codes via the helper tool: http://dl.acm.org/ccs/ccs.cfm Click “Generate CCS Codes” for more information. These will also need to be included on your camera ready PDF.
+
+Best regards,
+Paul Keir
+on behalf of the DHPCC++17 Program Committee
+
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 2
+TITLE: SYCL C++17 and OpenCL interoperability experimentation with  triSYCL
+AUTHORS: Anastasios Doumoulakis, Ronan Keryell and Kenneth O'Brien
+
+Overall evaluation: 1 (weak accept)
+
+----------- Overall evaluation -----------
+The paper "SYCL C++17 and OpenCL interoperability experimentation with triSYCL" presents an introduction to SYCL and its interoperation with OpenCL. This paper includes a good introduction to SYCL, which is motivated by a code sample that highlights some of the benefits that SYCL provides compared to OpenCL. The authors then describe the two main parts of the interoperability model for using SYCL and OpenCL code together. This interoperation is benchmarked using two applications, only one of which was in copy of the paper submitted for review. The results presented are interesting, but it's not completely clear which versions are compared. As far as I can tell, the two faster implementations are the SYCL/OpenCL and the pure OpenCL. The "redundant transfer" version is still SYCL/OpenCL, but it would have been interesting to see a pure SYCL version. The authors acknowledge that the current triSYCL cannot target GPUs, but it would be good to include this comparison for the CPU !
+ case. Overall, this paper is clearly a good fit for DHPC++, but the results could be more detailed and provide a more complete comparison of the different possible implementation scenarios.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 2
+TITLE: SYCL C++17 and OpenCL interoperability experimentation with  triSYCL
+AUTHORS: Anastasios Doumoulakis, Ronan Keryell and Kenneth O'Brien
+
+Overall evaluation: 2 (accept)
+
+----------- Overall evaluation -----------
+The paper is very well written and structured, and it provides a look at the SYCL OpenCL interoperability (an aspect of SYCL which is not normally a focus) in an interesting light. However the paper seems to focus more on the overview of SYCL than the OpenCL interoperability feature. I would have liked to see more in depth discussion of the OpenCL interoperability feature and how it was used to improve the scheduling of the machine learning algorithms as well as the proposed extensions and how they could improve the SYCL standard.
+
+I noted a few points which require revision:
+* It's mentioned that SYCL supports C++14/17 (this is true for the SYCL 2.2 provisional specification but not for the SYCL 1.2 specification), it would be good to clarify this.
+* When describing the OpenCL interoperability from SYCL to OpenCL, the accessor class is used as an example, however this interoperability feature is not supported for the accessor class.
+* In the second sample code the SYCL buffers should have a dimension template parameter.
+* In the future work section it would be good to mention PACXX and ParallelSTL as they are very related works.
+* "taking advantage of OpenMP simplicity and type safety" - maybe reword this slightly, this sounds as though SYCL is based on OpenMP.
+* "the shared memory between the host and devices" -> "the shared virtual memory between the host and devices"
+
+This paper would be a good addition to DHPCC++17 however I think it could be improved if it were to put more emphasis on the OpenCL interoperability aspect of the paper.
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 2
+TITLE: SYCL C++17 and OpenCL interoperability experimentation with  triSYCL
+AUTHORS: Anastasios Doumoulakis, Ronan Keryell and Kenneth O'Brien
+
+Overall evaluation: 2 (accept)
+
+----------- Overall evaluation -----------
+This paper presents an approach for interoperability between C++17, and
+OpenCL SYCL, named triSYCL. The goal of the project is to offer a single
+source programming model for host cpus and accelerators (gpus, ppgas).
+
+The paper is well written. It shows some results out of this approach,
+that show that it saves some data transfers back and forth from the
+accelerator, and it is competitive to a plain OpenCL implementation.
+
+Authors also indicate that they expect to be able to provide results on
+an FPGA device using OpenCL, after getting the clearance of the IP
+block.
+
+
+----------------------- REVIEW 4 ---------------------
+PAPER: 2
+TITLE: SYCL C++17 and OpenCL interoperability experimentation with  triSYCL
+AUTHORS: Anastasios Doumoulakis, Ronan Keryell and Kenneth O'Brien
+
+Overall evaluation: 1 (weak accept)
+
+----------- Overall evaluation -----------
+The paper starts with a very detailed introduction of SYCL, including an example application, and an exhaustive list of its advantages. The main content is based on the conclusion that SYCL with its OpenCL interoperability capabilities can be used instead of other OpenCL C++ wrappers to write OpenCL programmes that still use plain OpenCL kernel code, but have a simplified host code without the need for explicit data transfers. The latter being what other wrappers are lacking.
+
+Given the GPU example, it is not completely obvious whether the pure OpenCL version is using the proposed SYCL OpenCL coding style, or actually pure OpenCL using conventional host code---i.e. define 'pure'. The text/caption could be clearer here. Assuming it is the proposed OpenCL wrapper use of SYCL, it also provides a performance gain. Which would mean it is beneficial to not use SYCL for the kernel code, but that conclusion is not drawn. It would be interesting to also have the numbers for a conventional OpenCL implementation, using the C-API or the official OpenCL C++ wrapper with explicit memory transfers. Maybe showing the triSYCL version with redundant data transfers, is somehow related to that, otherwise its point remains completely unclear to this reviewer.
+
+The question remains: Regarding both, programmability, and performance, should I use a) SYCL with inline code, b) SYCL with OpenCL kernel code, or c) pure OpenCL (i.e. no SYCL at all)? After listing all the advantages of SYCL in section 2, I would assume (a). But the paper presents (b), and provides arguments over (c). So what about (a) vs. (b). Is the proposed use of SYCL a compromise for OpenCL programmes where going the last step towards (a), i.e. rewriting the kernel code as SYCL, is not an option? Or is there a performance argument?
+
+The second application section addressing FPGAs is missing due to IP issues. The related work section is a bit hard to read due to language issues. After reading the whole paper sequentially, I would recommend other readers to start with the Conclusion, which provides a clear summary of the paper's content.
+
+
+----------------------- REVIEW 5 ---------------------
+PAPER: 2
+TITLE: SYCL C++17 and OpenCL interoperability experimentation with  triSYCL
+AUTHORS: Anastasios Doumoulakis, Ronan Keryell and Kenneth O'Brien
+
+Overall evaluation: 1 (weak accept)
+
+----------- Overall evaluation -----------
+This paper investigates SYCL usage in OpenCL interoperability mode using the trySYCL compiler. 
+The paper written in a clear and elegant style and makes SYCL fundamentals and benefits easily accessible for newcomers in the area. The paper describes SYCL advantages via code examples and focuses mainly on interoperability mode when existing OpenCL code can be reused and also newly written OpenCL code can improve generic SYCL performance.
+
+Although, the title and some parts of the paper emphasizes C++17, not too much proposed C++17 features are used or referred by the article. 
+
+From the two examples supporting the measurement results of the interoperability mode only one is explained in details, the other is missing at the moment of the review.
+
+
+----------------------- REVIEW 6 ---------------------
+PAPER: 2
+TITLE: SYCL C++17 and OpenCL interoperability experimentation with  triSYCL
+AUTHORS: Anastasios Doumoulakis, Ronan Keryell and Kenneth O'Brien
+
+Overall evaluation: -1 (weak reject)
+
+----------- Overall evaluation -----------
+While the paper presents a decent description of SYCL the actual contributions (i.e. novelty) seems to be somewhat weak. There is a simple performance comparison between a pure SYCL version, a SYCL version which calls an OpenCL kernel and a pure OpenCL variant of one code (a second one would apparently be added). There is not much of any analysis into what causes performance differences. Also a paragraph in the description is confusing: "Note that since current triSYCL[10]cannot target GPU yet and the community edition version of ComputeCpp[4] cannot run yet on our Linux distribution, we cannot compare the results against the normal pure SYCL code running on GPU."
+a) What is ComputeCPP? It is the only time it is mentioned in the paper.
+b) Doesn't figure 4 show a comparison on GPU?
+c) If non of the three bars in fig 4 is the normal SYCL version what are they??
+
+All in all me opinion is that this paper doesn't enhance the discussions around SYCL by much. It would certainly need to be reworked to contain less SYCL explanation and more analysis of the implemented codes and the results obtained with the different variants.
+
+
+----------------------- REVIEW 7 ---------------------
+PAPER: 2
+TITLE: SYCL C++17 and OpenCL interoperability experimentation with  triSYCL
+AUTHORS: Anastasios Doumoulakis, Ronan Keryell and Kenneth O'Brien
+
+Overall evaluation: 1 (weak accept)
+
+----------- Overall evaluation -----------
+The paper discusses the interoperability of SYCL with OpenCL.
+Following an introduction to SYCL and experimental study using the triSYCL implementation is presented with some example code and performance results.
+A second example is currently missing from the paper, but promised to be added prior to the workshop after clearance of IP issues.
+
+The paper is generally well written, easy to follow and discusses a practical issue of importance to the SYCL and OpenCL communities.
+I would have liked to seen more discussion of the examples and especially the performance results instead of merely presenting them.
+
+Interesting points for discussion should be:
+Is the integration elegant and sufficient or are there rough patches which should be improved?
+
+The performance results are particular confusing for me.
+
+I'm not sure I understood what is actually presented in Figure 4 and how it has been measured.
+You state in the text that triSYCL cannot target GPUs yet, but Figure 4 presents GPU results for triSYCL. Could you please clarify this.
+It would help if you could clarify how the version mentioned in the text (SYCL, SYCL with OpenCL, pure OpenCL) match to the legend used in Figure 4.
+
+Why do the performance results differ when using pure OpenCL vs. triSYCL?
+Shouldn't these basically execute the same computations and perform the same data transfers?
+
