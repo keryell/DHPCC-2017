@@ -828,6 +828,16 @@ on provides also this interoperability mode, as shown with the
 application samples presented in this article and the performance
 comparisons with other frameworks.
 
+While the performance is generally not better with SYCL than with
+plain OpenCL kernels using the OpenCL host API, SYCL increases the
+programmer's productivity with the single-source type-safe programming
+model for both host code and kernel code and the task graph model with
+implicit data transfers.
+
+When interoperability with existing OpenCL code or OpenCL-compatible
+kernels is required, the OpenCL interoperability mode of SYCL provides
+a nicer host API than the usual OpenCL ones without requiring a
+specific SYCL device compiler.
 
 
 \bibliographystyle{ACM-Reference-Format}
