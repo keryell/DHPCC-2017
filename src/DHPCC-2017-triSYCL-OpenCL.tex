@@ -715,8 +715,19 @@ results against the normal pure SYCL code running on GPU.
 \subsection{Binary Neural Network for image classification on FPGA}
 \label{sec:example-from-ken}
 
-\emph{Awaiting clearance of IP issues for this application. Section to
-  be added before the workshop.}
+
+\begin{table}
+\caption{Performance Results (ms)}
+\begin{tabular}{|c |c| c| c| c|}
+\hline
+			&	Setup			& Build & Kernel  & Total \\\hline
+OpenCL& 5940.33		&	3	& 4584.6	& 10538.8 \\\hline
+SYCL	& 5946.5	  & 3	& 4834.4	& 10784.5 \\\hline
+\end{tabular}
+\end{table}
+
+%\emph{Awaiting clearance of IP issues for this application. Section to
+%  be added before the workshop.}
 
 
 \section{Related work}
