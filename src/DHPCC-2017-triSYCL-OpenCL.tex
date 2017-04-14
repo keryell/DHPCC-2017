@@ -551,35 +551,36 @@ image against all the reference images.
     \begin{axis}[ 
       ybar,
       axis on top,
-      ymax=8, ymin=0, 
-      height=7cm,
-      width=\hsize, 
-      enlarge x limits=0.3, 
-      ymajorgrids, 
+      ymax=8, ymin=0,
+      height=6cm,
+      width=\hsize,
+      enlarge x limits=0.3,
+      ymajorgrids,
       tick align=inside,
-      major grid style={draw=none}, 
+      major grid style={draw=none},
       axis x line*=left,
-      ylabel={ms}, 
-      xtick=data, 
-      legend cell align=left, 
-      max space between ticks=20pt, 
-      legend style={ at={(0.4,1.0)}, column sep=1ex },
+      ylabel={ms},
+      xtick=data,
+      legend cell align=left,
+      max space between ticks=20pt,
+      legend style={ at={(0.35,1.0)}, column sep=1ex },
       y label style={ at={(axis description cs:0.1,0.4)}, anchor=west},
-      symbolic x coords={cpu, gpu, igpu}, 
+      symbolic x coords={CPU, GPU, iGPU},
       nodes near coords=\rotatebox{90}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
       ]
-      \addplot[draw=none,fill=blue!40!white] coordinates {(cpu, 4.158)
-        (igpu, 7.275) (gpu, 6.717) };
-      \addplot[draw=none,fill=green!40!white] coordinates {(cpu,
-        1.329) (igpu, 2.303) (gpu, 1.642) };
-      \addplot[draw=none,fill=red!40!white] coordinates {(cpu, 0.917)
-        (igpu, 2.183) (gpu, 1.042) };
+      \addplot[draw=none,fill=blue!40!white] coordinates {(CPU, 4.158)
+        (iGPU, 7.275) (GPU, 6.717) };
+      \addplot[draw=none,fill=green!40!white] coordinates {(CPU,
+        1.329) (iGPU, 2.303) (GPU, 1.642) };
+      \addplot[draw=none,fill=red!40!white] coordinates {(CPU, 0.917)
+        (iGPU, 2.183) (GPU, 1.042) };
 
-      \legend{triSYCL red., triSYCL, "pure" OpenCL}
+      \legend{triSYCL redundant, triSYCL, Plain OpenCL API}
     \end{axis}
   \end{tikzpicture}
   \caption{Average total execution time for digit recognition
-    application per image.}
+    application per image running OpenCL kernels with different host
+    API for 3 different accelerator architectures.}
   \label{fig:results-digit-recognition}
 \end{figure}
 
