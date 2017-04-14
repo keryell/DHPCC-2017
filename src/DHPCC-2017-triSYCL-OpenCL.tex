@@ -718,9 +718,13 @@ running on GPU.
 \subsection{Binary Neural Network for image classification on FPGA}
 \label{sec:example-from-ken}
 
-In our second example, we present the performance results of a binary neural network based application, which can accelerate its computation on an FPGA using SYCL or OpenCL APIs. The SYCL implementation is TriSYCL in interoperabilty mode and the OpenCL implementation is that of Xilinx SDAccel.
+In our second example, we present the performance results of a binary neural network based application, which can accelerate its computation on an FPGA using SYCL or OpenCL APIs. The SYCL implementation is TriSYCL using SYCL's interoperabilty mode or by using the Xilinx OpenCL implementation, SDAccel. In this particular application, image data is passed as an input to the accelerator for classifcation. The output is a label of what the image contains.
 
-In table~\ref{tbl:perfbnn}, we report the performance of four critical sections our application and the total execution time for each. The results are an average of 10 executions. \textit{Setup} accounts for the time to acquire an OpenCL platform, device, context and queue. \textit{Memory} accounts of the buffer allocation time of the input and output. \textit{Build} describes the time taken to read the binary kernel file from disk, build an OpenCL program, and from it instantiate the kernel. For both cases, this includes the reconfiguration of the FPGA. \textit{Kernel} accounts for the execution of the kernel, including the setting of arguments and launch. Finally, \textit{Total} accounts for the entirety of the accelerated section, from setup until the results are returned to the host.
+The kernel code of the application is written in High Level Synthesis C++, which when synthesized for the FPGA acts as a binary kernel that is loaded by either SYCL or OpenCL runtimes. 
+
+In figure~\ref{fig:syclbnn} and~\ref{fig:openclbnn}, we display the differences in kernel execution code section of the OpenCL and SYCL implementations. In the case of the SYCL implementation, when the \textit{inputBuffer} is created, its data is loaded from the host to the device from \textit{inputVector}. The code following this is contained within braces, ensuring the kernel has completed execution and the data from the output has been copied back to the host to the \textit{outputVector} before executing subsequent code. The kernel arguments are also set with a single variadic function call. In the case of the OpenCL implementation, copies between host and device are explicit and kernel arguments must be set individually. 
+
+In table~\ref{tbl:perfbnn}, we report the performance of four critical sections our application and the total execution time for each. The results are an average of 10 executions. Measurements are taken from the wall clock using a high resolution timer. \textit{Setup} accounts for the time to acquire an OpenCL platform, device, context and queue. \textit{Memory} accounts of the buffer allocation time of the input and output. \textit{Build} describes the time taken to read the binary kernel file from disk, build an OpenCL program, and from it instantiate the kernel. For both cases, this includes the reconfiguration of the FPGA. \textit{Kernel} accounts for the execution of the kernel, including the setting of arguments and launch. Finally, \textit{Total} accounts for the entirety of the accelerated section, from setup until the results are returned to the host.
 
 
 Our findings with this example is that SYCL with OpenCL interoperability mode is competetive with directly using OpenCL, with the exception of a small one time overhead during the build phase. We are currently working to resolve this issue. Encouragingly, the kernel performance between both are comparable.
@@ -730,14 +734,54 @@ Our findings with this example is that SYCL with OpenCL interoperability mode is
 \begin{tabular}{|c |c| c| c| c| c |}
 \hline
 			&	\textit{Setup}			& \textit{Memory} & \textit{Build}  & \textit{Kernel} & \textit{Total} \\\hline
-OpenCL& 6490.22		&		.08& 4598.1	& 04.011 &11092.43 \\\hline
-SYCL	& 6411.32	  & .002 & 4903.65	& 03.91	&11325.57 \\\hline
+OpenCL& 6490.22		&		.08& 4598.1	& 4.011 &11092.43 \\\hline
+SYCL	& 6411.32	  & .002 & 4903.65	& 3.91	&11325.57 \\\hline
 \end{tabular}
 \label{tbl:perfbnn}
 \end{table}
 
 
+\begin{figure*}
+  \begin{tabular}{c}
+    \begin{lstlisting}[basicstyle=\scriptsize]
+  [...]
+		buffer<long> inputBuffer(inputVector, numInputElems);
+		{
+		buffer<long> outputBuffer(outputVector, numOutputElems);
+		queue.submit([&] (handler &cgh){
+			cgh.setArgs(inputBuffer.get_access<access::mode::read>(cgh), 
+				outputBuffer.get_access<access::mode::write>(cgh, false, 0,0,0,0L, count));
+			cgh.single_task(kernel);
+		});
+		}
+  [...]
+\end{lstlisting}
+\end{tabular}
+\caption{SYCL kernel launch example}
+\label{fig:syclbnn}
+\end{figure*}
 
+\begin{figure*}
+  \begin{tabular}{c}
+    \begin{lstlisting}[basicstyle=\scriptsize]
+  [...]
+		queue.enqueueWriteBuffer(inputBuffer,  CL_TRUE, 0, numInputElems, inputVector, NULL, &event);
+		kernel.setArgs(0, inputBuffer );
+		kernel.setArgs(1, outputBuffer );
+		kernel.setArgs(2, false );
+		kernel.setArgs(3, 0 );
+		kernel.setArgs(4, 0 );
+		kernel.setArgs(5, 0 );
+		kernel.setArgs(6, 0L );
+		kernel.setArgs(7, count );
+		queue.enqueueTask(kernel, NULL, &event);
+		queue.enqueueReadBuffer(outputBuffer, CL_TRUE, 0, numOutputElems, outputVector, NULL, &event);		
+  [...]
+\end{lstlisting}
+\end{tabular}
+\caption{OpenCL kernel launch example}
+\label{fig:openclbnn}
+\end{figure*}
 %\emph{Awaiting clearance of IP issues for this application. Section to
 %  be added before the workshop.}
 
