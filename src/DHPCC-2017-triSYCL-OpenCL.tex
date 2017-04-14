@@ -72,19 +72,33 @@
   Heterogeneous computing is required in systems ranging from low-end
   embedded systems up to the high-end HPC systems to reach
   high-performance while keeping power consumption low. Having more
-  and more accelerators and CPUs also creates challenges for the programmer,
-  requiring even more expertise of them. Fortunately, new modern
-  C++-based domain-specific languages such as SYCL simplifies
-  the programming at the full system level while keeping high
-  performance.
+  and more accelerators and CPUs also creates challenges for the
+  programmer, requiring even more expertise of them. Fortunately, new
+  modern C++-based domain-specific languages, such as the SYCL open
+  standard from Khronos Group, simplify the programming at the full
+  system level while keeping high performance.
 
-  Besides its single-source programming aspect, the SYCL open standard
-  from Khronos Group has an OpenCL interoperability mode, allowing to
-  reuse existing OpenCL code inside the SYCL framework to simplify and
-  optimize the data transfers between host and devices.
+  SYCL is a single-source programming model providing a task graph of
+  heterogeneous kernels that can be run on various accelerators or
+  even just the CPU. The memory heterogeneity is abstracted through
+  buffer objects and the memory usage is abstracted with accessor
+  objects. From these accessors, the task graph is implicitly
+  constructed, the synchronizations and the data movements across the
+  various physical memories are done automatically, by opposition to
+  OpenCL or CUDA.
+
+  Sometimes, some applications or libraries already exist using the
+  OpenCL standard or some OpenCL kernels are provided, either as
+  OpenCL kernel source code or even as built-in OpenCL kernels written
+  in RTL for extreme optimization on FPGA.
+
+  SYCL provides an OpenCL interoperability mode to reuse existing
+  OpenCL code while keeping the higher level task graph programming
+  model without needing explicit memory transfers.
 
   We present some experiments on two applications on GPU and FPGA with
-  the triSYCL open-source implementation.
+  the triSYCL open-source implementation to show the benefits of this
+  OpenCL interoperability mode.
 \end{abstract}
 
 %
@@ -150,7 +164,7 @@ configurable IO and network support, security support, and power control
 etc. High-performance applications may use a hierarchy of such systems
 scaling up towards utilizing a full-scale data-center.
 
-So the programmer is facing nowadays a fractal architecture, demanding
+So the programmer is facing a fractal architecture, demanding
 also more and more control for power efficiency. This tends to require
 a dense fractal set of skills and tools.
 
