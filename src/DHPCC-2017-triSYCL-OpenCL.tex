@@ -745,14 +745,14 @@ In table~\ref{tbl:perfbnn}, we report the performance of four critical sections 
 Our findings with this example is that SYCL with OpenCL interoperability mode is competetive with directly using OpenCL, with the exception of a small one time overhead during the build phase. We are currently working to resolve this issue. Encouragingly, the kernel performance between both are comparable.
 
 \begin{table}
-\caption{Performance Results (ms)}
-\begin{tabular}{|c |c| c| c| c| c |}
-\hline
-			&	\textit{Setup}			& \textit{Memory} & \textit{Build}  & \textit{Kernel} & \textit{Total} \\\hline
-OpenCL& 6490.22		&		.08& 4598.1	& 4.011 &11092.43 \\\hline
-SYCL	& 6411.32	  & .002 & 4903.65	& 3.91	&11325.57 \\\hline
-\end{tabular}
-\label{tbl:perfbnn}
+  \caption{Performance Results (ms)}
+  \begin{tabular}{|c |c| c| c| c| c |}
+    \hline
+    &   \textit{Setup}      & \textit{Memory} & \textit{Build}  & \textit{Kernel} & \textit{Total} \\\hline
+    OpenCL& 6490.22     &     .08& 4598.1   & 4.011 &11092.43 \\\hline
+    SYCL  & 6411.32     & .002 & 4903.65  & 3.91  &11325.57 \\\hline
+  \end{tabular}
+  \label{tbl:perfbnn}
 \end{table}
 
 
@@ -760,15 +760,15 @@ SYCL	& 6411.32	  & .002 & 4903.65	& 3.91	&11325.57 \\\hline
   \begin{tabular}{c}
     \begin{lstlisting}[basicstyle=\scriptsize]
   [...]
-		buffer<long> inputBuffer(inputVector, numInputElems);
-		{
-		buffer<long> outputBuffer(outputVector, numOutputElems);
-		queue.submit([&] (handler &cgh){
-			cgh.setArgs(inputBuffer.get_access<access::mode::read>(cgh), 
-				outputBuffer.get_access<access::mode::write>(cgh, false, 0,0,0,0L, count));
-			cgh.single_task(kernel);
-		});
-		}
+    buffer<long> inputBuffer(inputVector, numInputElems);
+    {
+    buffer<long> outputBuffer(outputVector, numOutputElems);
+    queue.submit([&] (handler &cgh){
+      cgh.setArgs(inputBuffer.get_access<access::mode::read>(cgh),
+        outputBuffer.get_access<access::mode::write>(cgh, false, 0,0,0,0L, count));
+      cgh.single_task(kernel);
+    });
+    }
   [...]
 \end{lstlisting}
 \end{tabular}
@@ -780,17 +780,17 @@ SYCL	& 6411.32	  & .002 & 4903.65	& 3.91	&11325.57 \\\hline
   \begin{tabular}{c}
     \begin{lstlisting}[basicstyle=\scriptsize]
   [...]
-		queue.enqueueWriteBuffer(inputBuffer,  CL_TRUE, 0, numInputElems, inputVector, NULL, &event);
-		kernel.setArgs(0, inputBuffer );
-		kernel.setArgs(1, outputBuffer );
-		kernel.setArgs(2, false );
-		kernel.setArgs(3, 0 );
-		kernel.setArgs(4, 0 );
-		kernel.setArgs(5, 0 );
-		kernel.setArgs(6, 0L );
-		kernel.setArgs(7, count );
-		queue.enqueueTask(kernel, NULL, &event);
-		queue.enqueueReadBuffer(outputBuffer, CL_TRUE, 0, numOutputElems, outputVector, NULL, &event);		
+    queue.enqueueWriteBuffer(inputBuffer,  CL_TRUE, 0, numInputElems, inputVector, NULL, &event);
+    kernel.setArgs(0, inputBuffer );
+    kernel.setArgs(1, outputBuffer );
+    kernel.setArgs(2, false );
+    kernel.setArgs(3, 0 );
+    kernel.setArgs(4, 0 );
+    kernel.setArgs(5, 0 );
+    kernel.setArgs(6, 0L );
+    kernel.setArgs(7, count );
+    queue.enqueueTask(kernel, NULL, &event);
+    queue.enqueueReadBuffer(outputBuffer, CL_TRUE, 0, numOutputElems, outputVector, NULL, &event);    
   [...]
 \end{lstlisting}
 \end{tabular}
