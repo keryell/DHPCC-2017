@@ -153,10 +153,11 @@ So the programmer is facing nowadays a fractal architecture, demanding
 also more and more control for power efficiency. This tends to require
 a dense fractal set of skills and tools.
 
-SYCL \cite{SYCL-1.2} is a new open standard from Khronos
+SYCL \cite{SYCL-1.2,SYCL-2.2-provisional} is a new open standard from Khronos
 Group aiming at solving some of the programming issues related to
-heterogeneous computing.  This pure C++17 domain-specific embedded
-language allows the programmer to write single-source C++17 host code
+heterogeneous computing.  This pure C++14 (for SYCL 1.2) or C++17 (for
+SYCL 2.2) domain-specific embedded
+language allows the programmer to write single-source C++ host code
 with accelerated code expressed as functors. The data accesses are
 described with accessor objects that implicitly define a task graph
 that can be asynchronously scheduled on a distributed-memory system
