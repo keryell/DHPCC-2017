@@ -488,15 +488,15 @@ to use existing programs or libraries with no overhead.
 
 There are 2 main parts in the interoperability mode:
 \begin{enumerate}
-\item It is possible to construct SYCL objects from existing OpenCL
+\item it is possible to construct SYCL objects from existing OpenCL
   objects to run SYCL single-source programs in relation with an
   existing OpenCL framework. For example a SYCL buffer can be
   constructed from an OpenCL \lstinline|cl_mem| or SYCL queue from a
   \lstinline|cl_command_queue|;
-\item It is possible to extract OpenCL objects from higher-level SYCL
-  objects to execute OpenCL code from the SYCL world, for example
-  extract a \lstinline|cl_mem| from a SYCL accessor to launch an
-  OpenCL kernel.
+\item it is possible to get some OpenCL objects from higher-level SYCL
+  objects to execute plain OpenCL code from the SYCL world, for
+  example launching an OpenCL kernel that uses an implicit
+  \lstinline|cl_mem| associated to a SYCL accessor.
 \end{enumerate}
 
 Whereas the interoperability mode was included in the SYCL standard to
@@ -676,8 +676,8 @@ int main(int argc, char* argv[]) {
 
 
 The main part of the SYCL with OpenCL interoperability version is
-shown on Figure~\ref{fig:digit-SYCL-OpenCL-code}. Even the kernel is
-described as OpenCL code with the help Boost.Compute
+shown on Figure~\ref{fig:digit-SYCL-OpenCL-code}. Even if the kernel is
+described as OpenCL code with the help of Boost.Compute
 \cite{Boost.Compute} for conciseness, the data are still stored in
 SYCL buffers and their usages are precised by some SYCL
 accessors. Compared to the pure SYCL version found in
@@ -702,16 +702,17 @@ reference\footnote{The task graph is not used to optimize transfers or
 version are shown on Figure~\ref{fig:results-digit-recognition}.
 
 All the measurements were made on the same Linux machine (i7-6700HQ
-with 16~GB of RAM and a GTX 960M for the GPU) with 4.10.6-1 kernel
+with 16~GB of RAM and an nVidia GTX 960M for the GPU) with 4.10.6-1 kernel
 and GCC 6.3.1. The OpenCL runtimes were nvidia-opencl
 378.13-6 for the discrete nVidia GPU, beignet 1.3.1-1 for the
 integrated Intel GPU and intel-opencl-runtime 1:16.1.1-2 for the Intel
 CPU. The compiler options can be seen at the GitHub project page.
 
 Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
-and the community edition version of ComputeCpp \cite{ComputeCpp}
-cannot run yet on our Linux distribution, we cannot compare the
-results against the normal pure SYCL code running on GPU.
+and the community edition version of the major SYCL implementation,
+ComputeCpp \cite{ComputeCpp}, cannot run on our Linux distribution yet,
+we cannot compare the results against the normal pure SYCL code
+running on GPU.
 
 
 \subsection{Binary Neural Network for image classification on FPGA}
