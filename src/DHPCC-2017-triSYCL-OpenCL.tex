@@ -761,6 +761,10 @@ In Table~\ref{tbl:perfbnn}, we report the performance of four critical sections 
 
 Our findings with this example is that SYCL with OpenCL interoperability mode is competitive with directly using OpenCL, with the exception of a small one-time overhead during the build phase. We are currently working to resolve this issue. Encouragingly, the kernel performance between both are comparable.
 
+The memory allocation time is shown as negligible for SYCL compared to
+OpenCL because it is done lazily by the runtime and is moved into the
+kernel execution time slot.
+
 \begin{figure*}
   \begin{tabular}{c}
     \begin{lstlisting}[basicstyle=\scriptsize]
