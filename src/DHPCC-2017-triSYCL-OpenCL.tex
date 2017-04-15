@@ -745,27 +745,6 @@ running on GPU.
   \label{tbl:perfbnn}
 \end{table}
 
-
-In our second example, we present the performance results of a binary
-neural network based application, which can accelerate its computation
-on an FPGA using SYCL or OpenCL APIs. The SYCL implementation uses
-triSYCL with OpenCL interoperabilty mode or by using directly the Xilinx OpenCL implementation, SDAccel. In this particular application, image data is passed as an input to the accelerator for classification. The output is a label of what the image contains.
-
-The kernel code of the application is written in High Level Synthesis
-C++, which, when synthesized for the FPGA, acts as a built-in OpenCL
-binary kernel that is loaded by either SYCL or OpenCL runtimes.
-
-In Figures~\ref{fig:syclbnn} and \ref{fig:openclbnn}, we display the differences in kernel execution code section of the OpenCL and SYCL implementations. In the case of the SYCL implementation, when the \textit{inputBuffer} is created, its data is loaded from the host to the device from \textit{inputVector}. The code following this is contained within braces, ensuring the kernel has completed execution and the data from the output has been copied back to the host to the \textit{outputVector} before executing subsequent code. The kernel arguments are also set with a single variadic function call. In the case of the OpenCL implementation, copies between host and device are explicit and kernel arguments must be set individually. 
-
-In Table~\ref{tbl:perfbnn}, we report the performance of four critical sections our application and the total execution time for each. The results are an average of 10 executions. Measurements are taken from the wall clock using a high resolution timer. \textit{Setup} accounts for the time to acquire an OpenCL platform, device, context and queue. \textit{Memory} accounts of the buffer allocation time of the input and output. \textit{Build} describes the time taken to read the binary kernel file from disk, build an OpenCL program, and, from it, instantiate the kernel. For both cases, this includes the reconfiguration of the FPGA. \textit{Kernel} accounts for the execution of the kernel, including the setting of arguments and launch. Finally, \textit{Total} accounts for the entirety of the accelerated section, from setup until the results are returned to the host.
-
-
-Our findings with this example is that SYCL with OpenCL interoperability mode is competitive with directly using OpenCL, with the exception of a small one-time overhead during the build phase. We are currently working to resolve this issue. Encouragingly, the kernel performance between both are comparable.
-
-The memory allocation time is shown as negligible for SYCL compared to
-OpenCL because it is done lazily by the runtime and is moved into the
-kernel execution time slot.
-
 \begin{figure*}
   \begin{tabular}{c}
     \begin{lstlisting}[basicstyle=\scriptsize]
@@ -808,6 +787,27 @@ kernel execution time slot.
 \caption{OpenCL kernel launch example.}
 \label{fig:openclbnn}
 \end{figure*}
+
+
+In our second example, we present the performance results of a binary
+neural network based application, which can accelerate its computation
+on an FPGA using SYCL or OpenCL APIs. The SYCL implementation uses
+triSYCL with OpenCL interoperabilty mode or by using directly the Xilinx OpenCL implementation, SDAccel. In this particular application, image data is passed as an input to the accelerator for classification. The output is a label of what the image contains.
+
+The kernel code of the application is written in High Level Synthesis
+C++, which, when synthesized for the FPGA, acts as a built-in OpenCL
+binary kernel that is loaded by either SYCL or OpenCL runtimes.
+
+In Figures~\ref{fig:syclbnn} and \ref{fig:openclbnn}, we display the differences in kernel execution code section of the OpenCL and SYCL implementations. In the case of the SYCL implementation, when the \textit{inputBuffer} is created, its data is loaded from the host to the device from \textit{inputVector}. The code following this is contained within braces, ensuring the kernel has completed execution and the data from the output has been copied back to the host to the \textit{outputVector} before executing subsequent code. The kernel arguments are also set with a single variadic function call. In the case of the OpenCL implementation, copies between host and device are explicit and kernel arguments must be set individually. 
+
+In Table~\ref{tbl:perfbnn}, we report the performance of four critical sections our application and the total execution time for each. The results are an average of 10 executions. Measurements are taken from the wall clock using a high resolution timer. \textit{Setup} accounts for the time to acquire an OpenCL platform, device, context and queue. \textit{Memory} accounts of the buffer allocation time of the input and output. \textit{Build} describes the time taken to read the binary kernel file from disk, build an OpenCL program, and, from it, instantiate the kernel. For both cases, this includes the reconfiguration of the FPGA. \textit{Kernel} accounts for the execution of the kernel, including the setting of arguments and launch. Finally, \textit{Total} accounts for the entirety of the accelerated section, from setup until the results are returned to the host.
+
+
+Our findings with this example is that SYCL with OpenCL interoperability mode is competitive with directly using OpenCL, with the exception of a small one-time overhead during the build phase. We are currently working to resolve this issue. Encouragingly, the kernel performance between both are comparable.
+
+The memory allocation time is shown as negligible for SYCL compared to
+OpenCL because it is done lazily by the runtime and is moved into the
+kernel execution time slot.
 
 
 \section{Related work}
