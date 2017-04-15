@@ -572,7 +572,7 @@ int search_image(buffer<int>& training, const Img& img, queue& q, const kernel& 
         // kernel is executed.
         cgh.set_args(training.get_access<access::mode::read>(cgh),
                      A.get_access<access::mode::read>(cgh),
-                     B.get_access<access::mode::write>(cgh),
+                     B.get_access<access::mode::discard_write>(cgh),
                      int { training_set_size }, int { pixel_number });
         // Launch the kernel with training_set_size work-items
         cgh.parallel_for(training_set_size, k);
@@ -658,39 +658,36 @@ image against all the reference images.
       ymax=8, ymin=0,
       height=6cm,
       width=\hsize,
-      enlarge x limits=0.3,
+      enlarge x limits=0.13,
       ymajorgrids,
       tick align=inside,
       major grid style={draw=none},
+      bar shift=0pt,
       axis x line*=left,
       ylabel={ms},
-      xtick=data,
+      xtick={triSYCL OMP, triSYCL OCL, ComputeCPP, OpenCL},
+      x tick label style={font=\small,align=center},
       legend cell align=left,
       max space between ticks=20pt,
       legend style={ at={(0.35,1.0)}, column sep=1ex },
       y label style={ at={(axis description cs:0.1,0.4)}, anchor=west},
-      symbolic x coords={CPU, GPU, iGPU},
-      nodes near coords=\rotatebox{90}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
+      symbolic x coords={triSYCL OMP, triSYCL OCL, ComputeCPP, OpenCL},
+      nodes near coords=\rotatebox{0}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
       ]
-      \addplot[draw=none,fill=blue!40!white] coordinates {(CPU, 4.158)
-        (iGPU, 7.275) (GPU, 6.717) };
-      \addplot[draw=none,fill=green!40!white] coordinates {(CPU,
-        1.329) (iGPU, 2.303) (GPU, 1.642) };
-      \addplot[draw=none,fill=red!40!white] coordinates {(CPU, 0.917)
-        (iGPU, 2.183) (GPU, 1.042) };
+      \addplot[draw=none,fill=blue!40!white] coordinates {(triSYCL OMP, 6.7)};
+      \addplot[draw=none,fill=blue!40!white] coordinates {(triSYCL OCL, 1.0)};
+      \addplot[draw=none,fill=green!40!white] coordinates {(ComputeCPP, 1.0)};
+      \addplot[draw=none,fill=red!40!white] coordinates {(OpenCL, 0.6)};
 
-      \legend{triSYCL redundant, triSYCL, Plain OpenCL API}
+      %\legend{triSYCL redundant, triSYCL, Plain OpenCL API}
     \end{axis}
   \end{tikzpicture}
   \caption{Average total execution time for digit recognition
-    application per image running OpenCL kernels with different host
-    API for 3 different accelerator architectures.}
+    application per image running OpenCL and SYCL kernels with different host API on a CPU.}
   \label{fig:results-digit-recognition}
 \end{figure}
 
-The examples are run with SYCL, SYCL with OpenCL interoperability running
-OpenCL kernel and a pure OpenCL implementations. The data sets can
-be found on \url{https://github.com/a-doumoulakis/triSYCL_knn} for
+The examples are run with ComputeCPP, triSYCL with OpenMP, triSYCL with OpenCL interoperability running OpenCL kernel and a pure OpenCL implementations. The data sets can be found on \url{https://github.com/a-doumoulakis/triSYCL_knn} for
 further inspection.
 
 The main part of the SYCL with OpenCL interoperability version is
@@ -712,26 +709,34 @@ Even if there is no explicit OpenCL buffer motion between host and
 device, the SYCL run-time uses the dependency graph constructed by the
 accessors to move or not to move the data for kernel execution.
 
-The performance results comparing a dumb triSYCL version with
-redundant transfers between host and device as a
-reference\footnote{The task graph is not used to optimize transfers or
-  to limit OpenCL buffer creations, to serve as an implementation
-  baseline.}, the one with optimized transfers and the pure OpenCL
-version are shown on Figure~\ref{fig:results-digit-recognition}.
+
+The performance observed when running triSYCL in OpenCL interoperability
+mode, triSYCL with OpenMP, ComputeCPP (the community edition version of
+the major SYCL implementation \cite{ComputeCpp}) and a pure OpenCL
+implementation is show in figure Figure~\ref{fig:results-digit-recognition}.
+
+triSYCL in OpenCL interoperability mode and the pure OpenCL version run
+the same OpenCL kernel while triSYCL with OpenMP and ComputeCPP run the
+same SYCL kernel.
+%ComputeCpp \cite{ComputeCpp},
+%The performance results comparing a dumb triSYCL version with
+%redundant transfers between host and device as a
+%reference\footnote{The task graph is not used to optimize transfers or
+%  to limit OpenCL buffer creations, to serve as an implementation
+%  baseline.}, the one with optimized transfers and the pure OpenCL
+%version are shown on Figure~\ref{fig:results-digit-recognition}.
 
 All the measurements were made on the same Linux machine (i7-6700HQ
-with 16~GB of RAM and an nVidia GTX 960M for the GPU) with 4.10.6-1 kernel
-and GCC 6.3.1. The OpenCL runtimes were nvidia-opencl
-378.13-6 for the discrete nVidia GPU, beignet 1.3.1-1 for the
-integrated Intel GPU and intel-opencl-runtime 1:16.1.1-2 for the Intel
-CPU. The compiler options can be seen at the GitHub project page.
+with 16~GB of RAM) with 4.10.6-1 kernel and GCC 6.3.1.
+The OpenCL runtime running on the intel CPU was
+the intel-opencl-runtime 1:16.1.1-2.
+The compiler options can be seen at the GitHub project page.
 
-Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
-and the community edition version of the major SYCL implementation,
-ComputeCpp \cite{ComputeCpp}, cannot run on our Linux distribution yet,
-we cannot compare the results against the normal pure SYCL code
-running on GPU.
-
+%Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
+%and the community edition version of the major SYCL implementation,
+%ComputeCpp \cite{ComputeCpp}, cannot run on our Linux distribution yet,
+%we cannot compare the results against the normal pure SYCL code
+%running on GPU.
 
 \subsection{Binary Neural Network for image classification on FPGA}
 \label{sec:example-from-ken}
