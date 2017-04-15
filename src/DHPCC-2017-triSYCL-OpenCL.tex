@@ -549,61 +549,6 @@ We have used triSYCL to simplify the OpenCL host-side programming of
 our machine learning applications.
 
 
-\subsection{Handwritten digit recognition in gray images using L2
-  norm}
-\label{sec:example-from-anast}
-
-To benchmark various languages and frameworks, we used an application
-for recognition of handwritten digits in 8-bit gray images of
-$28 \times 28$ pixels.
-
-There are 500 images compared against a training reference
-set of labeled digit images. A kernel is launched to compare each
-image against all the reference images.
-
-\begin{figure}
-  \begin{tikzpicture}
-    \begin{axis}[ 
-      ybar,
-      axis on top,
-      ymax=8, ymin=0,
-      height=6cm,
-      width=\hsize,
-      enlarge x limits=0.3,
-      ymajorgrids,
-      tick align=inside,
-      major grid style={draw=none},
-      axis x line*=left,
-      ylabel={ms},
-      xtick=data,
-      legend cell align=left,
-      max space between ticks=20pt,
-      legend style={ at={(0.35,1.0)}, column sep=1ex },
-      y label style={ at={(axis description cs:0.1,0.4)}, anchor=west},
-      symbolic x coords={CPU, GPU, iGPU},
-      nodes near coords=\rotatebox{90}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
-      ]
-      \addplot[draw=none,fill=blue!40!white] coordinates {(CPU, 4.158)
-        (iGPU, 7.275) (GPU, 6.717) };
-      \addplot[draw=none,fill=green!40!white] coordinates {(CPU,
-        1.329) (iGPU, 2.303) (GPU, 1.642) };
-      \addplot[draw=none,fill=red!40!white] coordinates {(CPU, 0.917)
-        (iGPU, 2.183) (GPU, 1.042) };
-
-      \legend{triSYCL redundant, triSYCL, Plain OpenCL API}
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Average total execution time for digit recognition
-    application per image running OpenCL kernels with different host
-    API for 3 different accelerator architectures.}
-  \label{fig:results-digit-recognition}
-\end{figure}
-
-The examples are run with SYCL, SYCL with OpenCL interoperability running
-OpenCL kernel and a pure OpenCL implementations. The data sets can
-be found on \url{https://github.com/a-doumoulakis/triSYCL_knn} for
-further inspection.
-
 \begin{figure*}
   \begin{tabular}{c}
     \begin{lstlisting}[basicstyle=\scriptsize]
@@ -689,6 +634,61 @@ int main(int argc, char* argv[]) {
     interoperability mode.\label{fig:digit-SYCL-OpenCL-code}}
 \end{figure*}
 
+
+\subsection{Handwritten digit recognition in gray images using L2
+  norm}
+\label{sec:example-from-anast}
+
+To benchmark various languages and frameworks, we used an application
+for recognition of handwritten digits in 8-bit gray images of
+$28 \times 28$ pixels.
+
+There are 500 images compared against a training reference
+set of labeled digit images. A kernel is launched to compare each
+image against all the reference images.
+
+\begin{figure}
+  \begin{tikzpicture}
+    \begin{axis}[
+      ybar,
+      axis on top,
+      ymax=8, ymin=0,
+      height=6cm,
+      width=\hsize,
+      enlarge x limits=0.3,
+      ymajorgrids,
+      tick align=inside,
+      major grid style={draw=none},
+      axis x line*=left,
+      ylabel={ms},
+      xtick=data,
+      legend cell align=left,
+      max space between ticks=20pt,
+      legend style={ at={(0.35,1.0)}, column sep=1ex },
+      y label style={ at={(axis description cs:0.1,0.4)}, anchor=west},
+      symbolic x coords={CPU, GPU, iGPU},
+      nodes near coords=\rotatebox{90}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
+      ]
+      \addplot[draw=none,fill=blue!40!white] coordinates {(CPU, 4.158)
+        (iGPU, 7.275) (GPU, 6.717) };
+      \addplot[draw=none,fill=green!40!white] coordinates {(CPU,
+        1.329) (iGPU, 2.303) (GPU, 1.642) };
+      \addplot[draw=none,fill=red!40!white] coordinates {(CPU, 0.917)
+        (iGPU, 2.183) (GPU, 1.042) };
+
+      \legend{triSYCL redundant, triSYCL, Plain OpenCL API}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Average total execution time for digit recognition
+    application per image running OpenCL kernels with different host
+    API for 3 different accelerator architectures.}
+  \label{fig:results-digit-recognition}
+\end{figure}
+
+The examples are run with SYCL, SYCL with OpenCL interoperability running
+OpenCL kernel and a pure OpenCL implementations. The data sets can
+be found on \url{https://github.com/a-doumoulakis/triSYCL_knn} for
+further inspection.
 
 The main part of the SYCL with OpenCL interoperability version is
 shown on Figure~\ref{fig:digit-SYCL-OpenCL-code}. Even if the kernel is
