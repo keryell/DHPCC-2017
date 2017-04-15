@@ -733,6 +733,18 @@ running on GPU.
 \subsection{Binary Neural Network for image classification on FPGA}
 \label{sec:example-from-ken}
 
+\begin{table}
+  \caption{Performance Results (ms)}
+  \begin{tabular}{|c |c| c| c| c| c |}
+    \hline
+    &   \textit{Setup}      & \textit{Memory} & \textit{Build}  & \textit{Kernel} & \textit{Total} \\\hline
+    OpenCL& 6490.22     &     .08& 4598.1   & 4.011 &11092.43 \\\hline
+    SYCL  & 6411.32     & .002 & 4903.65  & 3.91  &11325.57 \\\hline
+  \end{tabular}
+  \label{tbl:perfbnn}
+\end{table}
+
+
 In our second example, we present the performance results of a binary
 neural network based application, which can accelerate its computation
 on an FPGA using SYCL or OpenCL APIs. The SYCL implementation uses
@@ -748,18 +760,6 @@ In Table~\ref{tbl:perfbnn}, we report the performance of four critical sections 
 
 
 Our findings with this example is that SYCL with OpenCL interoperability mode is competitive with directly using OpenCL, with the exception of a small one-time overhead during the build phase. We are currently working to resolve this issue. Encouragingly, the kernel performance between both are comparable.
-
-\begin{table}
-  \caption{Performance Results (ms)}
-  \begin{tabular}{|c |c| c| c| c| c |}
-    \hline
-    &   \textit{Setup}      & \textit{Memory} & \textit{Build}  & \textit{Kernel} & \textit{Total} \\\hline
-    OpenCL& 6490.22     &     .08& 4598.1   & 4.011 &11092.43 \\\hline
-    SYCL  & 6411.32     & .002 & 4903.65  & 3.91  &11325.57 \\\hline
-  \end{tabular}
-  \label{tbl:perfbnn}
-\end{table}
-
 
 \begin{figure*}
   \begin{tabular}{c}
