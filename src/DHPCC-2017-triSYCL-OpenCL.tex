@@ -734,12 +734,13 @@ running on GPU.
 \label{sec:example-from-ken}
 
 \begin{table}
-  \caption{Performance Results (ms)}
-  \begin{tabular}{|c |c| c| c| c| c |}
-    \hline
-    &   \textit{Setup}      & \textit{Memory} & \textit{Build}  & \textit{Kernel} & \textit{Total} \\\hline
+  \caption{Performance results (ms) of the BNN application for 2 host
+    API.}
+  \begin{tabular}{|c|c|c|c|c|c|}
+    \cline{2-6}
+    \multicolumn{1}{c|}{}&   \textit{Setup}      & \textit{Memory} & \textit{Build}  & \textit{Kernel} & \textit{Total} \\\hline
     OpenCL& 6490.22     &     .08& 4598.1   & 4.011 &11092.43 \\\hline
-    SYCL  & 6411.32     & .002 & 4903.65  & 3.91  &11325.57 \\\hline
+    SYCL  & 6411.32     & .002   & 4903.65  & 3.91  &11325.57 \\\hline
   \end{tabular}
   \label{tbl:perfbnn}
 \end{table}
