@@ -539,10 +539,11 @@ using the triSYCL implementation.
 \label{sec:exper-with-opencl}
 
 triSYCL \cite{triSYCL} is an open-source implementation based on C++17
-and various Boost libraries \cite{Boost-1.63}. The device compiler used to
-outline the kernels in single-source mode is based on Clang
-\cite{Clang-4.0}/LLVM \cite{LLVM-4.0}. The OpenCL interoperability mode is
-based on Boost.Compute \cite{Boost.Compute}.
+and various Boost libraries \cite{Boost-1.63}. The host acceleration
+is provided with OpenMP. The device compiler used to outline the
+kernels in single-source mode is based on Clang \cite{Clang-4.0}/LLVM
+\cite{LLVM-4.0}. The OpenCL interoperability mode is based on
+Boost.Compute \cite{Boost.Compute}.
 
 To even simplify further the programming style, triSYCL
 implements Boost.Compute interoperability mode too, as an extension to
