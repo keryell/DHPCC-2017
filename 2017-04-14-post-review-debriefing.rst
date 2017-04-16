@@ -96,7 +96,7 @@ REVIEW 6
   There is not much of any analysis into what causes performance
   differences.
 
-TODO
+Not enough time for this deadline unfortunately.
 
   Also a paragraph in the description is confusing: "Note
   that since current triSYCL[10]cannot target GPU yet and the
@@ -112,7 +112,7 @@ Clarified.
   c) If non of the three bars in fig 4 is the normal SYCL version what
      are they??
 
-TODO
+Clarified with a newer experiment.
 
   All in all me opinion is that this paper doesn't enhance the
   discussions around SYCL by much. It would certainly need to be
@@ -129,21 +129,21 @@ REVIEW 7
   I'm not sure I understood what is actually presented in Figure 4 and
   how it has been measured.
 
-TODO
+Clarified with a newer experiment.
 
   You state in the text that triSYCL cannot target GPUs yet, but Figure
   4 presents GPU results for triSYCL. Could you please clarify this.
 
-TODO
+The test case has been simplified.
 
   It would help if you could clarify how the version mentioned in the
   text (SYCL, SYCL with OpenCL, pure OpenCL) match to the legend used in
   Figure 4.
 
-TODO
+Solved.
 
   Why do the performance results differ when using pure OpenCL
   vs. triSYCL?  Shouldn't these basically execute the same computations
   and perform the same data transfers?
 
-TODO
+To be investigated in another article...
