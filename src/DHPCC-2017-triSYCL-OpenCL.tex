@@ -666,18 +666,18 @@ image against all the reference images.
       bar shift=0pt,
       axis x line*=left,
       ylabel={ms},
-      xtick={triSYCL OMP, triSYCL OCL, ComputeCPP, OpenCL},
+      xtick={triSYCL OMP, triSYCL OCL, ComputeCpp, OpenCL},
       x tick label style={font=\small,align=center},
       legend cell align=left,
       max space between ticks=20pt,
       legend style={ at={(0.35,1.0)}, column sep=1ex },
       y label style={ at={(axis description cs:0.1,0.4)}, anchor=west},
-      symbolic x coords={triSYCL OMP, triSYCL OCL, ComputeCPP, OpenCL},
+      symbolic x coords={triSYCL OMP, triSYCL OCL, ComputeCpp, OpenCL},
       nodes near coords=\rotatebox{0}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
       ]
       \addplot[draw=none,fill=blue!40!white] coordinates {(triSYCL OMP, 6.7)};
       \addplot[draw=none,fill=blue!40!white] coordinates {(triSYCL OCL, 1.0)};
-      \addplot[draw=none,fill=green!40!white] coordinates {(ComputeCPP, 1.0)};
+      \addplot[draw=none,fill=green!40!white] coordinates {(ComputeCpp, 1.0)};
       \addplot[draw=none,fill=red!40!white] coordinates {(OpenCL, 0.6)};
 
       %\legend{triSYCL redundant, triSYCL, Plain OpenCL API}
@@ -688,8 +688,24 @@ image against all the reference images.
   \label{fig:results-digit-recognition}
 \end{figure}
 
-The examples are run with ComputeCPP, triSYCL with OpenMP, triSYCL with OpenCL interoperability running OpenCL kernel and a pure OpenCL implementations. The data sets can be found on \url{https://github.com/a-doumoulakis/triSYCL_knn} for
-further inspection.
+The examples are run on a CPU because it was the only common target of
+all the tested tools. The performance observed is show in figure
+Figure~\ref{fig:results-digit-recognition}.
+
+The version written in pure single-source SYCL C++ was run with
+triSYCL based on OpenMP and with the free community edition of
+ComputeCpp \cite{ComputeCpp}, the major SYCL implementation
+\cite{ComputeCpp} targeting OpenCL with SPIR. The version with the
+kernel written in OpenCL C directly is run either with the OpenCL host
+API directly or with triSYCL and OpenCL interoperability mode.
+
+triSYCL in OpenCL interoperability mode and the pure OpenCL version run
+the same OpenCL kernel while triSYCL with OpenMP and ComputeCpp run the
+same SYCL kernel.
+
+The data sets can be found on
+\url{https://github.com/a-doumoulakis/triSYCL_knn} for further
+inspection.
 
 The main part of the SYCL with OpenCL interoperability version is
 shown on Figure~\ref{fig:digit-SYCL-OpenCL-code}. Even if the kernel is
@@ -710,34 +726,21 @@ Even if there is no explicit OpenCL buffer motion between host and
 device, the SYCL run-time uses the dependency graph constructed by the
 accessors to move or not to move the data for kernel execution.
 
-
-The performance observed when running triSYCL in OpenCL interoperability
-mode, triSYCL with OpenMP, ComputeCPP (the community edition version of
-the major SYCL implementation \cite{ComputeCpp}) and a pure OpenCL
-implementation is show in figure Figure~\ref{fig:results-digit-recognition}.
-
-triSYCL in OpenCL interoperability mode and the pure OpenCL version run
-the same OpenCL kernel while triSYCL with OpenMP and ComputeCPP run the
-same SYCL kernel.
-%ComputeCpp \cite{ComputeCpp},
-%The performance results comparing a dumb triSYCL version with
-%redundant transfers between host and device as a
-%reference\footnote{The task graph is not used to optimize transfers or
-%  to limit OpenCL buffer creations, to serve as an implementation
-%  baseline.}, the one with optimized transfers and the pure OpenCL
-%version are shown on Figure~\ref{fig:results-digit-recognition}.
-
 All the measurements were made on the same Linux machine (i7-6700HQ
 with 16~GB of RAM) with 4.10.6-1 kernel and GCC 6.3.1.
 The OpenCL runtime running on the intel CPU was
 the intel-opencl-runtime 1:16.1.1-2.
 The compiler options can be seen at the GitHub project page.
 
-%Note that since current triSYCL \cite{triSYCL} cannot target GPU yet
-%and the community edition version of the major SYCL implementation,
-%ComputeCpp \cite{ComputeCpp}, cannot run on our Linux distribution yet,
-%we cannot compare the results against the normal pure SYCL code
-%running on GPU.
+ComputeCpp on this example is a little bit less performing than the
+pure OpenCL solution but does quite well if considered the
+productivity gain and that the tool is still a beta version 0.1.3.
+
+triSYCL with OpenMP is not yet optimized since the project was more
+focused up-to-now on experimenting with the specification rather than
+towards the performance. But we plan to use the SIMD mode of OpenMP 4
+to increase the performances.
+
 
 \subsection{Binary Neural Network for image classification on FPGA}
 \label{sec:example-from-ken}
