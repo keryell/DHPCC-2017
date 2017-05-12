@@ -656,31 +656,28 @@ image against all the reference images.
     \begin{axis}[
       ybar,
       axis on top,
-      ymax=8, ymin=0,
+      ymax=1, ymin=0,
       height=6cm,
       width=\hsize,
       enlarge x limits=0.13,
       ymajorgrids,
       tick align=inside,
       major grid style={draw=none},
-      bar shift=0pt,
       axis x line*=left,
       ylabel={ms},
-      xtick={triSYCL OMP, triSYCL OCL, ComputeCpp, OpenCL},
-      x tick label style={font=\small,align=center},
+      xtick=data,
       legend cell align=left,
       max space between ticks=20pt,
       legend style={ at={(0.35,1.0)}, column sep=1ex },
       y label style={ at={(axis description cs:0.1,0.4)}, anchor=west},
-      symbolic x coords={triSYCL OMP, triSYCL OCL, ComputeCpp, OpenCL},
-      nodes near coords=\rotatebox{0}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta},
+      symbolic x coords={triSYCL OMP, triSYCL OCL, ComputeCPP, OpenCL},
+      nodes near coords=\rotatebox{90}{\scriptsize\pgfmathprintnumber\pgfplotspointmeta}
       ]
-      \addplot[draw=none,fill=blue!40!white] coordinates {(triSYCL OMP, 6.7)};
-      \addplot[draw=none,fill=blue!40!white] coordinates {(triSYCL OCL, 1.0)};
-      \addplot[draw=none,fill=green!40!white] coordinates {(ComputeCpp, 1.0)};
-      \addplot[draw=none,fill=red!40!white] coordinates {(OpenCL, 0.6)};
-
-      %\legend{triSYCL redundant, triSYCL, Plain OpenCL API}
+      \addplot[draw=none,fill=blue!40!white] coordinates {(triSYCL OMP, 0.75)
+        (triSYCL OCL, 0.44) (ComputeCPP, 0.77) (OpenCL, 0.42)};
+      \addplot[draw=none,fill=green!40!white] coordinates {(triSYCL OMP, 0.43)
+        (triSYCL OCL, 0.43) (OpenCL, 0.42)};
+      \legend{GCC, Clang}
     \end{axis}
   \end{tikzpicture}
   \caption{Average total execution time for digit recognition
@@ -726,20 +723,20 @@ Even if there is no explicit OpenCL buffer motion between host and
 device, the SYCL run-time uses the dependency graph constructed by the
 accessors to move or not to move the data for kernel execution.
 
-All the measurements were made on the same Linux machine (i7-6700HQ
-with 16~GB of RAM) with 4.10.6-1 kernel and GCC 6.3.1.
-The OpenCL runtime running on the intel CPU was
-the intel-opencl-runtime 1:16.1.1-2.
+All the measurements were made on the same Linux machine (i7-6700
+with 32~GB of RAM) with Ubuntu 16.10, GCC 6.2, Clang 3.8.1
+The OpenCL runtime running on the intel CPU was the intel-opencl-runtime 16.1.1
 The compiler options can be seen at the GitHub project page.
 
 ComputeCpp on this example is a little bit less performing than the
 pure OpenCL solution but does quite well if considered the
 productivity gain and that the tool is still a beta version 0.1.3.
 
-triSYCL with OpenMP is not yet optimized since the project was more
+triSYCL with OpenMP is not yet optimized on GCC since the project was more
 focused up-to-now on experimenting with the specification rather than
 towards the performance. But we plan to use the SIMD mode of OpenMP 4
-to increase the performances.
+to increase the performances. The Clang implementation of OpenMP already
+uses SIMD when running the kernels making the performance similar to OpenCL.
 
 
 \subsection{Binary Neural Network for image classification on FPGA}
